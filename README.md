@@ -16,17 +16,14 @@ keep the essence of the plan.
 
 
 ## Extra topic Trainings ( in case you need them )
-  * Git training
-    * https://drive.google.com/file/d/0B7iKrGdVkDhINERiQnppOU5IVVk/view?usp=sharing
+  * [Git training](https://drive.google.com/file/d/0B7iKrGdVkDhINERiQnppOU5IVVk/view?usp=sharing)
   * Bash Trainings:
-    * https://drive.google.com/file/d/0B7iKrGdVkDhILU9QRWllWmNKM2M/view?usp=sharing
-    * https://drive.google.com/file/d/0B7iKrGdVkDhIWGVhVzhtTlZjWGc/view?usp=sharing
-    * https://drive.google.com/file/d/0B7iKrGdVkDhIRkVPSlNPdkdSS2c/view?usp=sharing
-    * https://drive.google.com/file/d/0B7iKrGdVkDhIbkdKYWI1R19oMzQ/view?usp=sharing
-  * GCC for performance Trainings:
-    * https://drive.google.com/open?id=0B7iKrGdVkDhIUzZTVTduczJrQTg
-  * GCC ROP attacks workshop:
-    * https://github.com/VictorRodriguez/operating-systems-lecture/tree/master/labs/gcc/security
+    * [Tutorial 1](https://drive.google.com/file/d/0B7iKrGdVkDhILU9QRWllWmNKM2M/view?usp=sharing)
+    * [Tutorial 2](https://drive.google.com/file/d/0B7iKrGdVkDhIWGVhVzhtTlZjWGc/view?usp=sharing)
+    * [Tutorial 3](https://drive.google.com/file/d/0B7iKrGdVkDhIRkVPSlNPdkdSS2c/view?usp=sharing)
+    * [Tutorial 4](https://drive.google.com/file/d/0B7iKrGdVkDhIbkdKYWI1R19oMzQ/view?usp=sharing)
+  * [GCC for performance Trainings:](https://drive.google.com/open?id=0B7iKrGdVkDhIUzZTVTduczJrQTg)
+  * [GCC ROP attacks workshop:](https://github.com/VictorRodriguez/operating-systems-lecture/tree/master/labs/gcc/security)
   * Makefile trainings:
     * [Tutorial 1](https://www.tutorialspoint.com/makefile/index.html)
     * [Tutorial 2](https://www.coursera.org/lecture/introduction-embedded-systems/6-make-18etg)
