@@ -44,9 +44,10 @@ Output:
 
 ## Graph in graphviz
 
+Script shoudl also geneate the file graph.log : 
+
 ```graphviz
 
-https://dreampuf.github.io/GraphvizOnline/
 
 digraph example {
 
@@ -63,4 +64,8 @@ digraph example {
 
 }
 ```
+
+To be tested in https://dreampuf.github.io/GraphvizOnline/
+
+
 ![test](test.svg)
