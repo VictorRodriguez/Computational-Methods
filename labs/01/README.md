@@ -61,3 +61,4 @@ digraph example {
 
 }
 ```
+![test](test.svg)
