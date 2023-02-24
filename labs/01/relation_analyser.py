@@ -17,7 +17,6 @@ class Graph:
                     isNode = True
                     connection = ''
 
-    
     def print(self):
         print(self.values)
 
