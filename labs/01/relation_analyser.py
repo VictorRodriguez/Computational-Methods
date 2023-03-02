@@ -30,7 +30,7 @@ class Graph:
         for node in self.values:
             for relations in self.values[node]:
                 if (relations != node):
-                    if (node not in self.values[relations]):
+                    if (node not in self.values[relations]): #
                         return False
         return True
 
@@ -38,18 +38,13 @@ class Graph:
         for node in self.values:
             for relations in self.values[node]:
                 if (relations != node):
-                    extraElement = True #En caso de que el arreglo no contenga otro elemento para tener x,y,z
                     for z in self.values[relations]:
-                        if (z != node or z != relations):
-                            if ((node not in self.values[z]) and (z not in self.values[node])):
+                        if (z != node and z != relations):
+                            if (z not in self.values[node]):
                                 return False
-                            else:
-                                extraElement = False
-                    if (extraElement):
-                        return False
         return True
     
-    def display(self) -> None:
+    def plot(self) -> None:
         # Create a graphviz graph object and display it on screen
         d = graphviz.Digraph(format='png')
         for node in self.values:
@@ -64,11 +59,15 @@ class Graph:
     3. Transitive: {self.isTransitive()}")
 
 def main():
-    g = Graph("{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }") 
+    #g = Graph("{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3), / (1,3), (3,1) }") # Should be reflexive, symmetric and transitive
     #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3)}")
+    #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3), (3, 1)}")
+    #g = Graph("{(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)}")
+    print("Hello World analyzing input!")
+    g = input("Enter your set: ")
     g.print()
     g.isEquivalence()
-    g.display()
+    g.plot()
 
 if __name__ == "__main__":
     main()
