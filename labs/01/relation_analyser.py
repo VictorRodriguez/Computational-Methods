@@ -59,7 +59,7 @@ class Graph:
     3. Transitive: {self.isTransitive()}")
 
 def main():
-    #g = Graph("{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3), / (1,3), (3,1) }") # Should be reflexive, symmetric and transitive
+    #g = Graph("{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3), (1,3), (3,1) }") # Should be reflexive, symmetric and transitive
     #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3)}")
     #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3), (3, 1)}")
     #g = Graph("{(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)}")
