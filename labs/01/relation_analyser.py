@@ -64,7 +64,7 @@ def main():
     #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3), (3, 1)}")
     #g = Graph("{(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)}")
     print("Hello World analyzing input!")
-    g = input("Enter your set: ")
+    g = Graph(input("Enter your set: "))
     g.print()
     g.isEquivalence()
     g.plot()
