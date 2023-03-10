@@ -56,9 +56,6 @@ class Graph:
         d.render('test-output/round-table.gv', view=True)
     
     def isEquivalence(self) -> None:
-        if (len(self.values) == 0):
-            print("There are no nodes in the graph")
-            return
         print(f"\
     1. Reflexive: {self.isReflexive()} \
     2. Symmetric: {self.isSymmetric()} \
