@@ -21,15 +21,16 @@ x = input()
 #Lee el string(input), en caso de ser numero lo guarda y cuando llega una coma o llave para cerrar lo agrega a una lista como int
 #En caso de que sea el primer numero con ese valor se guarda en listA
 def lectura(rawNums):
-    num = ""
+    eje = ""
     for x in rawNums:
-        if x == "1" or x == "2" or x == "3" or x == "4" or x == "5" or x == "6" or x == "7" or x == "8" or x == "9" or x == "0" :
-            num = num+x
+        if x != "(" and x != ")" and x != "{" and x != "}"and x != "," and x != " ":
+       # if x == "1" or x == "2" or x == "3" or x == "4" or x == "5" or x == "6" or x == "7" or x == "8" or x == "9" or x == "0" :
+            eje = eje+x
         if x =="," or x == "}":
-            list.append(int(num))
-            if not int(num) in listA:
-                listA.append(int(num))
-            num=""
+            list.append(str(eje))
+            if not str(eje) in listA:
+                listA.append(str(eje))
+            eje=""
     
 
 #reflexive
@@ -138,7 +139,7 @@ def graph():
     f = open("graph.log","w")
     f.write("digraph G {\n rankdir=LR;\n node [shape = circle];\n")
     for x in range(0,len(list),2):
-        relacion = str(list[x])+"->"+str(list[x+1])
+        relacion = list[x]+"->"+list[x+1]
         f.write(relacion+"\n")
     f.write("}\n")
     f.close()
@@ -148,6 +149,7 @@ def graph():
 #{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3),(1,3),(3,1) } = R,S,T
 #{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (1,3),(3,1) } = S,T
 #{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (1,3),(3,1) }
+#{ (a,a), (a,b), (a,d), (b,a), (b,b), (c,c), (d,a), (d,d),(b,d),(d,b) }
     
 lectura(x)
 reflexive()
@@ -155,3 +157,6 @@ symmetric()
 transitive()
 equivalence()
 graph()
+print(list)
+print("-12345-")
+print(listA)
