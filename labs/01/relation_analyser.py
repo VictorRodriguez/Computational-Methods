@@ -12,65 +12,67 @@ def Transitive(edges, key):
   return visit
 
 def analyze(val):
+
+  nodes=[]
+  sym={}
+  edges={}
+
+
+  for pair in val:
+    #Create nodes list
+    if pair[0] not in nodes:
+      nodes.append(pair[0])
+
+
+    #Create Symmetric list
+    #Source
+    if pair[0] not in sym:
+      sym[pair[0]]=[0,0]
+    #Destination
+    if pair[1] not in sym:
+        sym[pair[1]]=[0,0]
+  
+    sym[pair[0]][0]+=1
+    sym[pair[1]][1]+=1
+      
+  #Create edges list
+    if pair[0] not in edges:
+      edges[pair[0]]=[]
+  
+    edges[pair[0]].append(pair[1])
+
+
+  #CHECK
+
+  r=True
+  s=True
+
+  for node in nodes:
+    #Check Reflexive
+    if (node not in edges[node]):
+      r=False
     
-    nodes=[]
-    sym={}
-    edges={}
-    
-    for pair in val:
-      #Create nodes list
-      if pair[0] not in nodes:
-        nodes.append(pair[0])
+    #Check Symmetric
+    pair=sym[node]
+    if(pair[0]!=pair[1]):
+      s=False
 
+  #Check Transitive
+  t=True
+  i=0
+  while(t and i<len(nodes)):
+    state=nodes[i]
+    visit= Transitive(edges, state)
+    if (sorted(visit)!=sorted(edges[state])):
+      t=False
+    i+=1
 
-      #Create Symmetric list
-      #Source
-      if pair[0] not in sym:
-        sym[pair[0]]=[0,0]
-      #Destination
-      if pair[1] not in sym:
-          sym[pair[1]]=[0,0]
+  print("\nnodes: ",nodes)
+  print("edges: ",edges)
+  print("degree in/out: ",sym)
+  return r,s,t
 
-      sym[pair[0]][0]+=1
-      sym[pair[1]][1]+=1
-
-      #Create edges list
-      if pair[0] not in edges:
-        edges[pair[0]]=[]
-
-      edges[pair[0]].append(pair[1])
-
-
-      #CHECK
-      r=True
-      s=True
-      t=True
-      i=0
-    
-      for node in nodes:
-        #Check Reflexive
-        if (node not in edges[node]):
-          r=False
-
-        #Check Symmetric
-        pair=sym[node]
-        if(pair[0]!=pair[1]):
-          s=False
-
-      #Check Transitive
-      while(t and i<len(nodes)):
-        state=nodes[i]
-        visit= Transitive(edges, state)
-        if (sorted(visit)!=sorted(edges[state])):
-          t=False
-        i+=1
-
-      print("nodes: ",nodes)
-      print("edges: ",edges)
-      print("degree in/out: ",sym)
-      return r,s,t
-
-def plot():
+def plot(info):
     """
     Here goes your code to do the plot of the set
     """
@@ -93,16 +95,16 @@ def plot():
     
    
 def main():
-    #print("Hello World analyzing input!")
+    print("Hello World analyzing input!")
     #val = input("Enter your set: ")
     val= { (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }
     print(val)
     Reflexive,Symmetric,Transitive = analyze(val)
-    print(f"\
+    print(f"\n\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
     3. Transitive: {Transitive}")
-    plot()
+    plot(val)
 
 if __name__ == "__main__":
     main()
