@@ -18,9 +18,6 @@ class Graph:
                         isNode = True
                         connection = ''
 
-    def print(self):
-        print(self.values)
-
     def isReflexive(self) -> bool:
         for node in self.values:
             if node not in self.values[node]:
@@ -51,10 +48,13 @@ class Graph:
         d.render('test-output/round-table.gv', view=True)
     
     def isEquivalence(self) -> None:
-        print(f"\
-    1. Reflexive: {self.isReflexive()} \
-    2. Symmetric: {self.isSymmetric()} \
-    3. Transitive: {self.isTransitive()}")
+        reflexive = self.isReflexive()
+        symmetric = self.isSymmetric()
+        transitive = self.isTransitive()
+        print("(a) R is{} reflexive".format("" if reflexive else ' not'))
+        print("(b) R is{} symmetric".format("" if symmetric else ' not'))
+        print("(c) R is{} transitive".format("" if transitive else ' not'))
+        print("(d) R does{} have an equivalence relation".format("" if reflexive and symmetric and transitive else 'not'))
 
 def main():
     #g = Graph("{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3), (1,3), (3,1) }") # Should be reflexive, symmetric and transitive
@@ -67,7 +67,7 @@ def main():
     #g = Graph("{(0,0), (1,1) (0,0)}") # Should be reflexive, symmetric and transitive
     print("Hello World analyzing input!")
     g = Graph(input("Enter your set: "))
-    g.print()
+    print("Your set is:", g.values)
     g.isEquivalence()
     g.plot()
 
