@@ -17,7 +17,7 @@ def analyze(val):
     sym={}
     edges={}
     
-    for pair in set:
+    for pair in val:
       #Create nodes list
       if pair[0] not in nodes:
         nodes.append(pair[0])
