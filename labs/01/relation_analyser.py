@@ -13,9 +13,10 @@ class Graph:
                     isNode = False
                     connection = c
                 else:
-                    self.values[connection].append(c)
-                    isNode = True
-                    connection = ''
+                    if (c not in self.values[connection]): # No admite conexiones repetidas
+                        self.values[connection].append(c)
+                        isNode = True
+                        connection = ''
 
     def print(self):
         print(self.values)
@@ -63,6 +64,7 @@ def main():
     #g = Graph("{(0,0), (1,1), (0,1), (1,0)}") # Should be reflexive, symmetric and transitive
     #g = Graph("{(0,0), (1,0)}") # Should NOT be reflexive, NOT symmetric and yes transitive
     #g = Graph("{}") # Should be reflexive, symmetric and transitive
+    #g = Graph("{(0,0), (1,1) (0,0)}") # Should be reflexive, symmetric and transitive
     print("Hello World analyzing input!")
     g = Graph(input("Enter your set: "))
     g.print()
