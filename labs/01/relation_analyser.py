@@ -29,22 +29,16 @@ class Graph:
     def isSymmetric(self) -> bool:
         for node in self.values:
             for relations in self.values[node]:
-                if (relations != node):
-                    if (node not in self.values[relations]): #
-                        return False
+                if (node not in self.values[relations]): #
+                    return False
         return True
 
     def isTransitive(self) -> bool:
-        #Check if we have more than 2 nodes
-        if (len(self.values) < 3):
-            return False
         for node in self.values:
             for relations in self.values[node]:
-                if (relations != node):
-                    for z in self.values[relations]:
-                        if (z != node and z != relations):
-                            if (z not in self.values[node]):
-                                return False
+                for z in self.values[relations]:
+                    if (z not in self.values[node]):
+                        return False
         return True
     
     def plot(self) -> None:
@@ -64,10 +58,11 @@ class Graph:
 def main():
     #g = Graph("{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3), (1,3), (3,1) }") # Should be reflexive, symmetric and transitive
     #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3)}") # Should be reflexive, NOT symmetric and transitive
-    #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3), (3, 1)}") # Should be reflexive, NOT symmetric and transitive
-    #g = Graph("{(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)}") # Should NOT be Reflexive, and yes symmetric and yes transitive
-    #g = Graph("{(0,0), (1,1), (0,1), (1,0)}") # Should be reflexive, symmetric and NOT transitive
-    #g = Graph("{(0,0), (1,0)}") # Should be reflexive, symmetric and NOT transitive
+    #g = Graph("{(1, 1), (2, 2), (3, 3), (1, 2), (2, 3), (1, 3), (3, 1)}") # Should be reflexive, NOT symmetric and NOT transitive
+    #g = Graph("{(1,2), (1,3), (2,1), (2,3), (3,1), (3,2)}") # Should NOT be Reflexive, and yes symmetric and NOT transitive
+    #g = Graph("{(0,0), (1,1), (0,1), (1,0)}") # Should be reflexive, symmetric and transitive
+    #g = Graph("{(0,0), (1,0)}") # Should NOT be reflexive, NOT symmetric and yes transitive
+    #g = Graph("{}") # Should be reflexive, symmetric and transitive
     print("Hello World analyzing input!")
     g = Graph(input("Enter your set: "))
     g.print()
