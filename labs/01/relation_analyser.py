@@ -1,3 +1,9 @@
+# Reflexivity, Symmetry and Transitivity
+# Diego Sebastian Garcia Cabrera A01634071
+# Implementation of computational methods
+# Group: 601
+# Tecnologico de Monterrey Campus Guadalajara
+# Sabado 11 de Marzo de 2023
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
 def analyze(val):
