@@ -1,36 +1,87 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+# Heber Giovanni Moran Briones - A01642300
 
-def analyze(val):
-    """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
-    """
-    Reflexive = False
-    Symmetric = False
-    Transitive = False
+# IMPORTANTE -> Mantener el nombre del archivo en main.py
 
-    return Reflexive,Symmetric,Transitive
+import graphviz as gv
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+
+# Función que determina si el set es reflexivo
+def is_reflexive(R):
+  for i in R:
+    if (i, i) not in R:
+      return False
+    else:
+      return True
+
+
+# Función que determina si el set es simétrico
+def is_symetric(R):
+  for i, j in R:
+    if (j, i) not in R:
+      return False
+  return True
+
+
+#Función que determina si el set es transitivo
+def is_transitive(R):
+  for i in R:
+    for j in R:
+      for s in R:
+        if (i, j) in R and (j, s) in R and (s, i) not in R:
+          return False
+  return True
+
+
+# Prints de resultados en para ambos casos de cada función
+def analyze(R):
+  if is_reflexive(R) == True:
+    print("Es reflexivo")
+  else:
+    print("No es reflexivo")
+
+  if is_symetric(R) == True:
+    print("Es simetrico")
+  else:
+    print("No es simetrico")
+
+  if is_transitive(R) == True:
+    print("Es transitivo")
+  else:
+    print("No es transitivo")
+
+
+# Import del set a un script
+def plot(conjunto, archivo):
+  g = gv.Digraph()
+  for a, b in conjunto:
+    g.edge(str(a), str(b))
+  g.render(archivo, format='png')
+
 
 def main():
-    print("Hello World analyzing input!")
-    val = input("Enter your set: ")
-    print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
-    print(f"\
-    1. Reflexive: {Reflexive} \
-    2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+  # Casos de prueba
+  R = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1), (2, 3), (3, 2), (1, 3), (3, 1)}
+
+  S = {(0, 0), (1, 0)}
+
+  T = {(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)}
+
+  print("Caso de prueba 1\n")
+  analyze(R)
+
+  print("\n---------------")
+
+  print("\nCaso de prueba 2\n")
+  analyze(S)
+
+  print("\n---------------")
+
+  print("\nCaso de prueba 3\n")
+  analyze(T)
+
+  #Solamente usé esta función con un solo set (Set del ejercicio)
+  plot(R, "graph.log")
+
 
 if __name__ == "__main__":
-    main()
+  main()
