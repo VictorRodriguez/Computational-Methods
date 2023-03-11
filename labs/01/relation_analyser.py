@@ -5,7 +5,8 @@ def main():
     """
     Created on Sun Feb 19 19:45:20 2023
 
-    @author: jusus
+    @author: Jesus Enrique Diaz Bernal Robinson Bours
+    ID: A00227255
     """
 
     # Graphviz graph
