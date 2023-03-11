@@ -8,89 +8,73 @@ from graphviz import Digraph
 LOG_FILE_NAME = "graph.log"
 
 
-def parse(string):
-    adj_list = {}
-    flag = True
-    for char in string:
-        if char.isnumeric():
-            if flag:
-                if char not in adj_list:
-                    adj_list[char] = []
-                flag = False
-                node = char
-            else:
-                adj_list[node].append(char)
-                flag = True
-                node = ''   
-    return adj_list
-
-def print_graph(adj_list):
-    print(adj_list)
-
-def isReflexive(adj_list):
-    for node in adj_list:
-        if node not in adj_list[node]:
+def isSymmetric(graph):
+    for (node, relation) in graph:
+        if(relation, node) not in graph:
             return False
     return True
 
-def isSymmetric(adj_list):
-    for v in adj_list:
-        adyacent = adj_list[v]
-        for a in adyacent:
-            if v not in adj_list[a]:
-                return False
+def isReflexive(graph):
+    for node in set(nodes[0] for nodes in graph):
+        if (node, node) not in graph:
+            return False
+    return True
+
+def isTransitive(graph):
+    for (node1, relation1) in graph:
+        for (node2, relation2) in graph:
+            if relation1 == node2:
+                if (node1, relation2) not in graph:
+                    return False
     return True
 
 
-def isTransitive(adj_list):
-    for node in adj_list:
-        for adyacent in adj_list[node]:
-            if(adyacent != node):
-                for adyacent2 in adj_list[adyacent]:
-                    if(adyacent2 != node and adyacent2 not in adj_list[node]):
-                        return False
-                    
+def isEquivalence(graph):
+    return isReflexive(graph) and isSymmetric(graph) and isTransitive(graph)
 
-def isEquivalence(adj_list):
-    if(isReflexive(adj_list) and isSymmetric(adj_list) and isTransitive(adj_list)):
-        return True
-    return False
-
-def classify(adj_list):
+def classify(graph):
     print("(a) R is ", end="")
-    if isReflexive(adj_list):
-        print("reflexive,")
+    if isReflexive(graph):
+        print("reflexive")
     else:
-        print("not reflexive,")
+        print("not reflexive")
     print("(b) R is ", end="")
-    if isSymmetric(adj_list):
-        print("symmetric,")
+    if isSymmetric(graph):
+        print("symmetric")
     else:
-        print("not symmetric,")
+        print("not symmetric")
     print("(c) R is ", end="")
-    if isTransitive(adj_list):
-        print("transitive,")
+    if isTransitive(graph):
+        print("transitive")
     else:
-        print("not transitive,")
-    print("(d) R ", end="")
-    if isEquivalence(adj_list):
-        print("have equivalence relation-")
+        print("not transitive")
+    print("(d) R is ", end="")
+    if isEquivalence(graph):
+        print("an equivalence relation")
     else:
-        print("does not have equivalence relation")
+        print("not an equivalence relation")
 
-def plot (adj_list):
-    dot = Digraph(comment='Graph', filename = LOG_FILE_NAME)
-    for node in adj_list:
-        for relation in adj_list[node]:
-            dot.edge(node, relation)
-    dot.render(engine='dot', view=True, format='pdf')
+def plot(graph):
+    # Crear un nuevo grafo dirigido
+    dot = Digraph("Grafo", filename=LOG_FILE_NAME)
+
+    # Agregar los nodos y aristas al grafo dirigido
+    for edge in graph:
+        dot.edge(str(edge[0]), str(edge[1]))
+
+    # Renderizar el grafo dirigido como una imagen PNG
+    dot.render()
+
+
+    # Mostrar la imagen
+    dot.view()
 
 def main():
     string = input("Enter a string: ")
-    adj_list = parse(string)
-    plot(adj_list)
-    classify(adj_list)
-    print_graph(adj_list)
+    graph = eval(string)
+    classify(graph)
+    plot(graph)
+
 
 if __name__ == "__main__":
     main()
