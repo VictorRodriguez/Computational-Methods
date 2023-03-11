@@ -38,13 +38,14 @@ def imprime(Reflexive, Symmetric, Transitive):
     else:
         print("- (c) R is not Transitive")
     
+def plot(val):
+    g = graphviz.Digraph('G', filename = 'graph.log')
+    g.attr(rankdir = 'LR')
+    g.attr('node', shape = 'circle')
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
+    for (a, b) in val:
+        g.edge(str(a), str(b))
+
     g.view()
 
 def main():
@@ -58,6 +59,8 @@ def main():
 
     Reflexive, Symmetric, Transitive = analyze(val)
     imprime(Reflexive, Symmetric, Transitive)
+
+    plot(val)
 
 if __name__ == "__main__":
     main()
