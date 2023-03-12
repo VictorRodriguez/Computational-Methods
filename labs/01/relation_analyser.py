@@ -9,8 +9,18 @@ def analyze(val):
     """
     Reflexive = False
     Symmetric = False
-    Transitive = False
-
+    Transitive = True
+    
+    for(a,b) in val:
+            if a == b: # Symmetric
+                Reflexive = True
+            for (c,d) in val:
+                if b == c: # Statement is useful for  both transitive and symmetric
+                    if(a == d): # Symmetric
+                        Symmetric = True
+                    if(a,d) not in val:  # Transitive
+                        Transitive = False
+            
     return Reflexive,Symmetric,Transitive
 
 def plot():
@@ -23,7 +33,8 @@ def plot():
 
 def main():
     print("Hello World analyzing input!")
-    val = input("Enter your set: ")
+    val = { (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }
+    # val = input("Enter your set: ") 
     print(val)
     Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
@@ -34,3 +45,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
