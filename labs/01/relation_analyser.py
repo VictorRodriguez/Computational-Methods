@@ -50,8 +50,8 @@ def plot(val):
 
 def main():
     print("Hello World analyzing input!")
-    # val = input("Enter your set: ")
-    val = "{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }"
+    val = input("Enter your set: ")
+    # val = "{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }"
     print(val)
     Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
