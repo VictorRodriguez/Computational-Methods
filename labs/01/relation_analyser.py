@@ -1,36 +1,60 @@
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
 def analyze(val):
-    """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
-    """
     Reflexive = False
     Symmetric = False
     Transitive = False
+    Equivalence = False
 
-    return Reflexive,Symmetric,Transitive
+    for x,y in val:
+        if(x,x) in val:
+            Reflexive = True
+        else: 
+            Reflexive = False
+            break
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+    for x,y in val:
+        if(y,x) in val:
+            Symmetric = True
+        else:
+            Symmetric = False
+            break
+
+    for x,y in val:
+        for w,z in val:
+            if y == w and (x,z) in val:
+                Transitive = True
+            else: 
+                Transitive = False
+                break
+
+    if(Reflexive == True & Symmetric == True & Transitive == True):
+      Equivalence = True
+    else:
+      Equivalence = False
+
+    return Reflexive,Symmetric,Transitive,Equivalence
+
+def plot(val):
+  g = graphviz.Digraph('G', filename='graph.log')
+  g.attr('node', shape='circle')
+  g.attr(rankdir='LR')
+  for i in val:
+    g.edge(str(i[0]),str(i[1]))
+  g.view()
 
 def main():
-    print("Hello World analyzing input!")
-    val = input("Enter your set: ")
+    print("Hello World analyzing input!\n")
+    val = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1), (2, 3), (3, 2), (1, 3), 
+(3, 1)}
     print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
+    Reflexive,Symmetric,Transitive,Equivalence = analyze(val)
     print(f"\
-    1. Reflexive: {Reflexive} \
-    2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+    \n1. Reflexive: {Reflexive} \
+    \n2. Symmetric: {Symmetric} \
+    \n3. Transitive: {Transitive}\
+    \n4. Equivalence Relation: {Equivalence}")
+    plot(val)
 
 if __name__ == "__main__":
     main()
