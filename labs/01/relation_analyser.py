@@ -2,6 +2,7 @@ import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
 #Nolberto Castro Sánchez
 #A01641501
+#Reflexivity, Symmetry and Transitivity
 #11 de Marzo del 2023
 
 def translate(val):
