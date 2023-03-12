@@ -73,9 +73,7 @@ def isEquivalence(val):
 
 
 def plot(val):
-    """
-    Here goes your code to do the plot of the set
-    """
+
     g = graphviz.Digraph('G', filename='Lab 01.gv')
     g.attr(rankdir='LR')
     g.attr('node', shape='circle')
@@ -85,6 +83,7 @@ def plot(val):
             g.edge(str(i), str(j))
 
     g.view()
+
 
 def main():
    # print("Hello World analyzing input!")
@@ -97,7 +96,6 @@ def main():
 
     isEquivalence(val)
 
-    #plot()
 
 if __name__ == "__main__":
     main()
