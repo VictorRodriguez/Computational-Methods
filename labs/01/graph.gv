@@ -1,0 +1,12 @@
+digraph G {
+	node [shape=circle]
+	rankdir=LR
+	0 -> 1
+	0 -> 0
+	1 -> 1
+	0 -> 3
+	3 -> 0
+	3 -> 3
+	2 -> 2
+	1 -> 0
+}
