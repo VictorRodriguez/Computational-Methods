@@ -75,15 +75,27 @@ def plot(relations):
 
 def main():
 
-    set = input("Enter your set: ")
+    set = input("\nEnter your set: ")
     relations = input("Enter your relations: ")
 
     Reflexive, Symmetric, Transitive = analyze(set, relations)
 
-    print(f"\
+    print(f"\n\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
+    3. Transitive: {Transitive}\n")
+
+    if(Reflexive): print("(a) R is Reflexive")
+    else: print("(a) R is NOT Reflexive")
+
+    if(Symmetric): print("(a) R is Symmetric")
+    else: print("(b) R is NOT Symmetric")
+
+    if(Transitive): print("(a) R is Transitive")
+    else: print("(c) R is NOT Transitive")
+
+    if(Reflexive and Symmetric and Transitive): print("(a) R has an Equivalence Relation")
+    else: print("(d) R does NOT have an Equivalence Relation")
 
     plot(relations)
 
