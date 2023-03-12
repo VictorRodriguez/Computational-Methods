@@ -1,3 +1,10 @@
+"""
+    Implementation of Computational Methods (TC2037.601)
+    Professor Victor Rodriguez
+    Lab 01
+    Juan Pablo Zambrano barajas A01636420
+    Created 06/03/2023, Last modification 11/03/2023
+"""
 import graphviz  # https://graphviz.readthedocs.io/en/stable/index.html
 
 def analyze(val, alphabet):
@@ -30,12 +37,12 @@ def plot(val):
 
 def main():
   print("Hello World analyzing input!")
-  #val = input("Enter your set: ")
+  val = input("Enter your set: ")
   #Set which is Symmetric, Reflexive and Transitive for testing
   #conjunto_tuplasSRT = "{(1,1), (2,2), (3,3), (1,2), (2,1), (1,3), (3,1), (2,3), (3,2)}"
   #alfabetoSRT = { 1, 2, 3}
   #So we dont take half an hour writing 
-  val = "{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }"
+  #val = "{ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }"
   print(val)
   #Alphabet is defined
   alphabet = {0, 1, 2, 3}
