@@ -13,6 +13,7 @@ keep the essence of the plan.
 ## Agenda:
 
 * [Introduction](https://drive.google.com/file/d/1kDH3y-FKhiVncsrYUxzL6bLVbrkT7aVr/view?usp=share_link)
+* [Automatas](https://docs.google.com/presentation/d/1vOyRxuhJGbhoa0HnPSMiPa6VI7DVR_JW/edit?usp=share_link&ouid=102798387258237811400&rtpof=true&sd=true)
 
 
 ## Extra topic Trainings ( in case you need them )
