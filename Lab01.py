@@ -88,7 +88,10 @@ def main():
         print("The relation is an equivalence relation")
     else:
         print("The relation is not an equivalence relation")
-    plot(val)
+
+    #Case {}
+    if (len(val)) > 0:
+        plot(val)
 
 if __name__ == "__main__":
     main()
