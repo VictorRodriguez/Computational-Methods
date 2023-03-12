@@ -15,14 +15,14 @@ def is_symmetric(val):
 
 
 def is_transitive(val):
-    for pair in val:
-        if pair[0] == pair[1]:
+    for a_b in val:
+        if a_b[0] == a_b[1]:
             continue
-        for pair2 in val:
-            a_c = (pair[0], pair2[1])
-            if pair == pair2 or pair2[0] == pair2[1]:
+        for b_c in val:
+            a_c = (a_b[0], b_c[1])
+            if a_b == b_c or b_c[0] == b_c[1]:
                 continue
-            elif pair[1] == pair2[0] and a_c[0] != a_c[1] and a_c in val:
+            elif a_b[1] == b_c[0] and a_c[0] != a_c[1] and a_c in val:
                 return True
     return False
 
