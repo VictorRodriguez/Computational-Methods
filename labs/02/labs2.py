@@ -1,36 +1,65 @@
 import graphviz
 
-# globalCounter = 0
-
-# class State:
-#     def __init__(self):
-#         self.label = globalCounter
-#         globalCounter += 1
-#         self.isAccepted = False
-#         self.left = None
-#         self.right = None
+class State:    
+    def __init__(self, isAccepted = False) -> None:
+        global globalCounter
+        self.label = globalCounter
+        globalCounter += 1
+        self.isAccepted = isAccepted
     
-#     def __init__(self, isAccepted) -> None:
-#         self.label = globalCounter
-#         globalCounter += 1
-#         self.isAccepted = isAccepted
-#         self.left = None
-#         self.right = None
-
+class Transition:
+    def __init__(self, transition: str, state) -> None:
+        self.transition = transition
+        self.state = state
     
-# class NFATree:
-#     def __init__(self, transition):
-#         self.root = (State(), transition)
-#         self.isVisited = False
+class NFA:
+    def __init__(self) -> None:
+        startState = State()
+        self.startState = startState
+        self.endStates = [startState]
+        self.transitions = {
+            startState.label: []
+        }
 
-
-#     def addState(self, transition, isAccepted):
-#         if self.root == None:
-#             self.root = State(isAccepted)
-#             return
-#         else:
-#             self.addStateRec(self.root, transition, isAccepted)
+    def addBasicTransition(self, transition: str):
+        newState = State(True)
+        for i in self.endStates:
+            self.transitions[i.label].append(Transition(transition, newState))
+            i.isAccepted = False # The end state is no longer an end state
+        self.endStates = [newState]
+        self.transitions[newState.label] = []
     
+    def concat(self, nfa):
+        for i in self.endStates:
+            i.isAccepted = False
+            self.transitions[i.label].append(Transition('E', nfa.startState))
+        self.endStates = nfa.endStates
+        self.transitions.update(nfa.transitions)
+
+    def union(self, nfa):
+        newState = State()
+        self.transitions[newState.label] = [Transition('E', self.startState), Transition('E', nfa.startState)]
+        # The end states should be merged
+        self.endStates.extend(nfa.endStates)
+        self.transitions.update(nfa.transitions)
+        self.startState = newState
+
+    def starOperation(self):
+        for i in self.endStates:
+            self.transitions[i.label].append(Transition('E', self.startState))
+        newState = State(True)
+        self.transitions[self.startState.label].append(Transition('E', newState))
+        self.endStates.append(newState)
+        self.transitions[newState.label] = []
+
+    def draw(self):
+        d = graphviz.Digraph(format='png')
+
+        for i in self.transitions:
+            for j in self.transitions[i]:
+                d.edge(str(i), str(j.state.label), label=j.transition)
+        d.render('test-output/round-table.gv', view=True)
+
 def shunting_yard(regex):
     output_queue = []
     operator_stack = []
@@ -75,12 +104,45 @@ def addPoints(regex: str):
             regex[i] = regex[i] + '.'
     return ''.join(regex)
 
-regex = 'a*aUba'
-regex = addPoints(regex)
-print(regex)
-regex = shunting_yard(regex)
-stack = []
-d = graphviz.Digraph(format='png')
+def postFixToNFA(postfix: str):
+    global globalCounter
+    nfaStack = []
+    globalCounter = 0
+    for i in postfix:
+        if i in {'a', 'b', 'A', 'E'}:
+            nfa = NFA()
+            nfa.addBasicTransition(i)
+            nfaStack.append(nfa)
+            # for i in nfaStack:
+            #     print(i.startState.label, i.endStates[0].label)
+        elif i == '.':
+            nfa2 = nfaStack.pop()
+            nfa1 = nfaStack.pop()
+            nfa1.concat(nfa2)
+            nfaStack.append(nfa1)
+        elif i == 'U':
+            nfa2 = nfaStack.pop()
+            nfa1 = nfaStack.pop()
+            nfa1.union(nfa2)
+            nfaStack.append(nfa1)
+        elif i == '*':
+            nfa = nfaStack.pop()
+            nfa.starOperation()
+            nfaStack.append(nfa)
+    return nfaStack.pop()
+
+def main():
+    regex = input("Enter the regex: ")
+    regex = addPoints(regex)
+    regex = shunting_yard(regex)
+    print(regex)
+    nfa = postFixToNFA(regex)
+    nfa.draw()
+
+if __name__ == "__main__":
+    main()
+
+
 
 
     
