@@ -57,6 +57,9 @@ class NFA:
         #add the double circle for the end states
         for i in self.endStates:
             d.node(str(i.label), shape='doublecircle')
+
+        # Color the start state
+        d.node(str(self.startState.label), color='blue')
         
         for i in self.transitions:
             for j in self.transitions[i]:
@@ -116,8 +119,6 @@ def postFixToNFA(postfix: str):
             nfa = NFA()
             nfa.addBasicTransition(i)
             nfaStack.append(nfa)
-            # for i in nfaStack:
-            #     print(i.startState.label, i.endStates[0].label)
         elif i == '.':
             nfa2 = nfaStack.pop()
             nfa1 = nfaStack.pop()
