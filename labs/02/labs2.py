@@ -54,7 +54,10 @@ class NFA:
 
     def draw(self):
         d = graphviz.Digraph(format='png')
-
+        #add the double circle for the end states
+        for i in self.endStates:
+            d.node(str(i.label), shape='doublecircle')
+        
         for i in self.transitions:
             for j in self.transitions[i]:
                 d.edge(str(i), str(j.state.label), label=j.transition)
