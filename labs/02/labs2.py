@@ -104,9 +104,11 @@ def addPoints(regex: str):
     regex = list(regex)
     alphabet = {'a', 'b', 'A', 'E'}
     for i in range(len(regex)-1):
-        if regex[i] in alphabet and regex[i+1] in alphabet:
+        if regex[i] in alphabet and (regex[i+1] in alphabet or regex[i+1] == '('):
             regex[i] = regex[i] + '.'
-        elif regex[i] == '*' and regex[i+1] in alphabet:
+        elif regex[i] == '*' and (regex[i+1] in alphabet or regex[i+1] == '('):
+            regex[i] = regex[i] + '.'
+        elif regex[i] == ')' and regex[i+1] in alphabet:
             regex[i] = regex[i] + '.'
     return ''.join(regex)
 
