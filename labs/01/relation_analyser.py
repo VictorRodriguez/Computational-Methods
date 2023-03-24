@@ -45,6 +45,7 @@ def main():
     # R = {(1, 2), (1, 3), (2, 3), (3, 4)} #Example 1 (False, False, False)
     # R={ (0,0), (0,1), (0,3), (1,0), (1,1  ), (2,2), (3,0), (3,3) } #Example 2 (True, True, False)
     R={ (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) } #Example 3 
+    
     print(f"R = {R}")
     print(f"R is reflexive? {is_reflexive(R)}")
     print(f"R is symmetric? {is_symmetric(R)}")

@@ -1,0 +1,3 @@
+digraph {
+	q8 -> q9 [label=b]
+}
