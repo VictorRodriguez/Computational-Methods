@@ -68,7 +68,8 @@ class NFA:
         d = graphviz.Digraph(format='png')
         #add the double circle for the end states
         for i in self.endStates:
-            d.node(str(i.label), shape='doublecircle')
+            if i.isAccepted:
+                d.node(str(i.label), shape='doublecircle')
 
         # Color the start state
         d.node(str(self.startState.label), color='blue')
@@ -99,6 +100,8 @@ def shunting_yard(regex):
             # If the token is a right parenthesis, pop operators off the stack until a left parenthesis is found
             while operator_stack[-1] != '(':
                 output_queue.append(operator_stack.pop())
+                if not operator_stack:
+                    raise ValueError('Mismatched parentheses')
             operator_stack.pop()  # Pop the left parenthesis off the stack
         elif token in {'U', '*', '.'}:
             # If the token is an operator, pop operators off the stack until an operator with lower precedence is found
@@ -108,7 +111,10 @@ def shunting_yard(regex):
 
     # Pop any remaining operators off the stack and add them to the output queue
     while operator_stack:
-        output_queue.append(operator_stack.pop())
+        popped = operator_stack.pop()
+        if popped == '(':
+            raise ValueError('Mismatched parentheses')
+        output_queue.append(popped)
 
     return ''.join(output_queue)
 
@@ -128,6 +134,10 @@ def postFixToNFA(postfix: str):
     global globalCounter
     nfaStack = []
     globalCounter = 0
+
+    if len(postfix) == 0:
+        return NFA()
+    
     for i in postfix:
         if i in {'a', 'b', 'A', 'E'}:
             nfa = NFA()
@@ -152,7 +162,11 @@ def postFixToNFA(postfix: str):
 def main():
     regex = input("Enter the regex: ")
     regex = addPoints(regex)
-    regex = shunting_yard(regex)
+    try:
+        regex = shunting_yard(regex)
+    except ValueError as e:
+        print(e)
+        return
     print(regex)
     nfa = postFixToNFA(regex)
     nfa.draw()
