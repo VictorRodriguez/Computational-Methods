@@ -55,29 +55,16 @@ def subDivide(regex: str):##Make an expression tree
     for i in regex:
         # +
         if(i == "+"):
-            if(top(stack) in symbols or type(top(stack)) == ExpressionNode):
-                left = ExpressionNode(stack.pop())
-                stack.append(left)
-                stack.append(i)
-            elif(stack[-1] == ")"):
-                cont = 1
-                for j in range(len(stack)-2, -1, -1):
-                    if(stack[j] == ")"):
-                        cont += 1
-                    elif(stack[j] == "("):
-                        cont -= 1
-                    if(cont == 0):
-                        break
-                left = subDivide(stack[j+1:-1])
-                stack = stack[:j]
-                stack.append(left)
-                stack.append(i)
+            left = ExpressionNode(stack.pop())
+            stack.append(left)
+            stack.append(i)
         # *
         elif(i == "*"):
             left = ExpressionNode(stack.pop())
             stack.append(ExpressionNode(i, left))
         # ()
         elif(i == "("):
+            stack.append(".")
             stack.append(i)
         elif(i == ")"):
             cont = 1
@@ -89,28 +76,22 @@ def subDivide(regex: str):##Make an expression tree
                 if(cont == 0):
                     break
             left = subDivide(stack[j+1:-1])
-
+            left=left[1:]
             stack = stack[:j]
+            if(top(stack)=="+"):
+                left = ExpressionNode(stack.pop(), left[0])
             stack.append(left[0])
-
         # a or b
         elif(i in symbols):
             if(top(stack) in symbols or type(top(stack)) == ExpressionNode):
                 left = ExpressionNode(stack.pop())
                 stack.append(ExpressionNode(".", left, ExpressionNode(i)))
-            elif(top(stack) == "+"):
-                stack.pop()
-                left = ExpressionNode(stack.pop())
-                stack.append(ExpressionNode("+", left, ExpressionNode(i)))
-
             else:
                 stack.append(ExpressionNode(i))
-        print(stack)
-    if(len(stack)>1):
-        for i in range(len(stack)-1, 0, -1):
-            left = ExpressionNode(stack.pop(i))
-            stack[i-1] = ExpressionNode(".", stack[i-1], left)
+        
+    print(stack)
     return stack
+
         
 def top(stack: list):
     if(len(stack) == 0):
@@ -191,7 +172,7 @@ def enfaTonfa(enfa):
 
 
 def main():
-    i="(a+b)*"
+    i="a+b+ab"
     s=subDivide(i)
     s[0].display()
     enfa=regexToEnfa(s[0])
