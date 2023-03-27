@@ -120,7 +120,7 @@ def shunting_yard(regex):
 
 def addPoints(regex: str):
     regex = list(regex)
-    alphabet = {'a', 'b', 'A', 'E'}
+    alphabet = {'a', 'b', 'A', 'E'} 
     for i in range(len(regex)-1):
         if regex[i] in alphabet and (regex[i+1] in alphabet or regex[i+1] == '('):
             regex[i] = regex[i] + '.'
