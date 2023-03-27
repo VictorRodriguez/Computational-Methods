@@ -65,6 +65,8 @@ def subDivide(regex: str):##Make an expression tree
         # ()
         elif(i == "("):
             stack.append(".")
+        # ()
+        elif(i == "("):
             stack.append(i)
         elif(i == ")"):
             cont = 1
