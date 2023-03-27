@@ -1,3 +1,15 @@
+"""
+Author: Armando Terrazas Gómez
+ID: A01640924
+Date: 27/03/2023
+
+Converts a Regex to a NFA and then plots it
+
+Alphabet: {a, b, A, E}
+Operators: {*, U}
+Accepts parenthesis
+"""
+
 import graphviz
 
 class State:    
