@@ -5,7 +5,7 @@ Date: 27/03/2023
 
 Converts a Regex to a NFA and then plots it
 
-Alphabet: {a, b, A, E}
+Alphabet: {a, b}, Alphabet symbol: {A}, Empty string: {E}
 Operators: {*, U}
 Accepts parenthesis
 """
