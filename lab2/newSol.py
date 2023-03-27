@@ -180,7 +180,7 @@ def enfaTonfa(enfa):
     pass
 
 def main():
-    i="a+(b+a)"
+    i="a+(b+a*)"
     s=subDivide(i)
     print(s)
     s[0].display()
