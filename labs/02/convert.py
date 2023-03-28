@@ -207,5 +207,3 @@ def plot(graph):
 var = solve_postreg(inreg_2_posreg("(abUa)*"))
 plot(var)
 makeFileFormat(var)
-
-
