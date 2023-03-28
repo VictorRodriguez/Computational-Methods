@@ -205,7 +205,7 @@ def plot(graph):
     g.view()
 
 var = solve_postreg(inreg_2_posreg("(abUa)*"))
-#plot(var)
+plot(var)
 makeFileFormat(var)
 
 
