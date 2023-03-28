@@ -168,6 +168,44 @@ def solve_postreg(input):
     
     return stack[0]
 
-solve_postreg(inreg_2_posreg("(abUa)*")).print()
+def makeFileFormat(graph):
+    f = open("graph.log", "w")
+    f.write("digraph finite_state_machine {\n\tfontname=\"Helvetica,Arial,sans-serif\"\n\tnode [fontname=\"Helvetica,Arial,sans-serif\"]\n\tedge [fontname=\"Helvetica,Arial,sans-serif\"]\n\trankdir=LR;\n\tnode [shape = doublecircle];")
+    
+    doublecircle_nodes = graph.accept_states
+    for node in doublecircle_nodes:
+        f.write(f" {node}")
+    f.write(";\n\tnode [shape = circle];\n")
+
+    for e in graph.states:
+        for t in graph.states[e].transitions:
+            f.write(f"\t{e} -> {str(t[1].tag)} [label = \"{str(t[0])}\"];\n")
+
+    f.write("}")
+
+def plot(graph):
+    g = graphviz.Digraph('G', filename='graph')
+    g.attr('graph', fontname="Helvetica,Arial,sans-serif")
+    g.attr('node', fontname="Helvetica,Arial,sans-serif")
+    g.attr('edge', fontname="Helvetica,Arial,sans-serif")
+    g.attr(rankdir='LR')
+    
+    doublecircle_nodes = graph.accept_states
+    for node in doublecircle_nodes:
+        g.node(str(node), shape='doublecircle')
+    
+    for e in graph.states:
+        if not graph.states[e].accept:
+            g.node(str(graph.states[e].tag), shape='circle')
+
+    for e in graph.states:
+        for t in graph.states[e].transitions:
+            g.edge(str(e), str(t[1].tag), label=str(t[0]))
+
+    g.view()
+
+var = solve_postreg(inreg_2_posreg("(abUa)*"))
+#plot(var)
+makeFileFormat(var)
 
 
