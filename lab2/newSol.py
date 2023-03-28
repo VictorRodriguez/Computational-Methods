@@ -27,7 +27,7 @@ class NFA:
         self.transitions = transitions #Lista de diccionarios
     def display(self):
         #Graphviz
-        g = gv.Digraph(format='pdf')
+        g = gv.Digraph(format='png')
         for i in self.transitions:
             for j in i:
                 for k in i[j]:
@@ -175,17 +175,38 @@ def regexToEnfa(regex: ExpressionNode):
                 # nfa.display()
                 return nfa
     return None
-        
-def enfaTonfa(enfa):
-    pass
 
+def validate(regex: str):
+    #Check parenthesis
+    stack=[]
+    for i in regex:
+        if(i=="("):
+            stack.append(i)
+        elif(i==")"):
+            if(len(stack)==0):
+                print("Error: Parenthesis")
+                return False
+            stack.pop()
+    if(len(stack)!=0):
+        print("Error: Parenthesis")
+        return False
+    #Check symbols
+    for i in regex:
+        if(i not in symbols and i not in non_symbols):
+            print(f"Error: Symbol {i}")
+            return False
+    return True    
 def main():
-    i="a+(b+a*)"
-    s=subDivide(i)
-    print(s)
-    s[0].display()
-    enfa=regexToEnfa(s[0])
-    # enfa.display()
-    
+    i="a+b(b*)(ba)"##input("Enter regex: ")
+    if validate(i):
+        s=subDivide(i)
+        # print(s)
+        # s[0].display()
+        enfa=regexToEnfa(s[0])
+        enfa.display()
+    else:
+        print("Invalid regex")
+
+
 if __name__ == "__main__":
     main()
