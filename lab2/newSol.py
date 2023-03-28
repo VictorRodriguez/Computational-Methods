@@ -142,7 +142,9 @@ def regexToEnfa(regex: ExpressionNode):
                 end=NFAState("q"+str(states),True)
                 states=states+1
                 transitions=[{start.name:{left.start.name:"ε",end.name:"ε"}},
-                            {left.end.name:{end.name:"ε",left.start.name:"ε"}}]
+                            {left.end.name:{end.name:"ε"}},
+                            {end.name:{start.name:"ε"}}
+                            ]
                 left.end.isFinal=False
                 transitions=transitions+left.transitions
                 nfa=NFA(start,end,transitions)
@@ -168,7 +170,7 @@ def regexToEnfa(regex: ExpressionNode):
                 states=states+1
                 transitions=[{start.name:{left.start.name:"ε",right.start.name:"ε"}},
                             {left.end.name:{end.name:"ε"}},
-                            {right.end.name:{end.name:"ε"}}]
+                            {right.end.name:{end.name:"ε"}}] 
                 left.end.isFinal=False
                 right.end.isFinal=False
                 transitions=transitions+left.transitions+right.transitions
@@ -198,7 +200,7 @@ def validate(regex: str):
             return False
     return True    
 def main():
-    i="a+b(b*)(ba)"##input("Enter regex: ")
+    i="(a+b)*"##input("Enter regex: ")
     if validate(i):
         s=subDivide(i)
         # print(s)
