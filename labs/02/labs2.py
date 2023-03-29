@@ -161,6 +161,7 @@ def postFixToNFA(postfix: str):
 
 def main():
     regex = input("Enter the regex: ")
+    regex = regex.replace(' ', '')
     regex = addPoints(regex)
     try:
         regex = shunting_yard(regex)
