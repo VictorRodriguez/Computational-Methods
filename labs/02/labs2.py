@@ -80,10 +80,9 @@ class NFA:
 
     def draw(self):
         d = graphviz.Digraph(format='png')
-        #add the double circle for the end states
-        for i in self.endStates:
-            if i.isAccepted:
-                d.node(str(i.label), shape='doublecircle')
+        #add the double circle for the end state
+        if self.endStates[0].isAccepted:
+            d.node(str(self.endStates[0].label), shape='doublecircle')
 
         # Color the start state
         d.node(str(self.startState.label), color='blue')
