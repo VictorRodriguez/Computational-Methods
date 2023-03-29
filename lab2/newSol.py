@@ -44,7 +44,7 @@ class NFAState:
 
 
 
-non_symbols = ['+', '*', '.', '(', ')']
+non_symbols = ['+', '*', '(', ')']
 symbols=['a','b']
 
 stack = [] 
@@ -182,6 +182,8 @@ def regexToEnfa(regex: ExpressionNode):
 def validate(regex: str):
     #Check parenthesis
     stack=[]
+    if(len(regex)==0 or regex=="ε"):
+        return True
     for i in regex:
         if(i=="("):
             stack.append(i)
