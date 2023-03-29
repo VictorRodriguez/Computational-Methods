@@ -64,6 +64,20 @@ class NFA:
         self.endStates.append(newState)
         self.transitions[newState.label] = []
 
+    def oneFinalState(self):
+        for i in self.endStates:
+            i.isAccepted = False
+        newState = State(True)
+        for i in self.endStates:
+            self.transitions[i.label].append(Transition('E', newState))
+        self.endStates = [newState]
+        self.transitions[newState.label] = []
+
+    def cleanStartState(self): # The Start state should recieve any transitions from any other state
+        newStartState = State()
+        self.transitions[newStartState.label] = [Transition('E', self.startState)]
+        self.startState = newStartState
+
     def draw(self):
         d = graphviz.Digraph(format='png')
         #add the double circle for the end states
@@ -157,7 +171,10 @@ def postFixToNFA(postfix: str):
             nfa = nfaStack.pop()
             nfa.starOperation()
             nfaStack.append(nfa)
-    return nfaStack.pop()
+    finalNFA = nfaStack.pop()
+    finalNFA.oneFinalState() # Make sure there is only one final state
+    finalNFA.cleanStartState() # Make sure the start state doesn't recieve any transitions
+    return finalNFA
 
 def main():
     regex = input("Enter the regex: ")
