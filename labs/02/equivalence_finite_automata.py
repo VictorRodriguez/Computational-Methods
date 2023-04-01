@@ -73,7 +73,6 @@ def main():
             transitions.append((new_state1, new_state2, 2))
             transitions.append((new_state2, new_state1, 2))
 
-            # Update the current state to the first new state
             current_state = new_state1
 
         # If the character is a star symbol
