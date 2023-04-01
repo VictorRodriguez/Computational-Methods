@@ -100,9 +100,9 @@ def bfs(root_state):
                 queue.append(target_state)
 
 def inreg_2_posreg(input):
-    operators = "U*()"
-    pe = {'U': 1, '*': 3, '(': 4}
-    ps = {'U': 1, '*': 2, '(': 0}
+    operators = "U*.()"
+    pe = {'U': 2, '.': 3, '*': 4, '(': 5}
+    ps = {'U': 1, '.': 2, '*': 3, '(': 0}
     stack = []
     res = []
     for id, c in enumerate(input):
@@ -129,10 +129,7 @@ def inreg_2_posreg(input):
             stack.insert(0, c)
             continue
         
-        if id >=1 and input[id-1].isalpha() and input[id-1] != 'U':
-            res[0] += c
-        else:
-            res.insert(0, c)
+        res.insert(0, c)
 
     while stack:
         res.insert(0, stack.pop(0))
@@ -145,27 +142,33 @@ def solve_postreg(input):
     stack = []
     for e in input:
         if e == '*':
+            """
+            for e in stack:
+                e.print()
+                print()
+            """
+            for e in stack:
+                e.print()
+                print()
             a = stack.pop(0)
 
             stack.insert(0, a.star())
             continue
-        if e == 'U':
+        if e == '.':
             b = stack.pop(0)
             a = stack.pop(0)
+
+            stack.insert(0, a.concatenate(b))
+            continue
+        if e == 'U':
+            a = stack.pop(0)
+            b = stack.pop(0)
 
             stack.insert(0, a.unite(b))
             continue
 
-        if len(e) > 1:
-            res = DFA(e[0])
-            e = e[1:]
-            for c in e:
-                res.concatenate(DFA(c))
-            stack.insert(0, res)
-            continue
-    
         stack.insert(0, DFA(e))
-    
+
     return stack[0]
 
 def makeFileFormat(graph):
@@ -204,6 +207,8 @@ def plot(graph):
 
     g.view()
 
-var = solve_postreg(inreg_2_posreg("(abUa)*"))
+print(inreg_2_posreg("(a.bUa)*"))
+var = solve_postreg(inreg_2_posreg("(a.bUa)*"))
+var.print()
 plot(var)
-makeFileFormat(var)
+#makeFileFormat(var)
