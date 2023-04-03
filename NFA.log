@@ -1,0 +1,22 @@
+digraph NFA {
+	rankdir=LR
+	5 [shape=circle]
+	4 [shape=doublecircle]
+	5 -> 4 [label="Ɛ"]
+	1 [shape=circle]
+	1 -> 4 [label="Ɛ"]
+	3 [shape=circle]
+	3 -> 4 [label="Ɛ"]
+	4 [shape=circle]
+	4 -> 0 [label="Ɛ"]
+	4 [shape=circle]
+	4 -> 2 [label="Ɛ"]
+	0 [shape=circle]
+	1 [shape=doublecircle]
+	0 -> 1 [label=a]
+	2 [shape=circle]
+	3 [shape=doublecircle]
+	2 -> 3 [label=b]
+	5 [shape=doublecircle]
+	4 [shape=circle]
+}
