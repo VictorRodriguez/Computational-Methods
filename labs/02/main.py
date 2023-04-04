@@ -3,6 +3,7 @@ Author: Carlos David Amezcua Canales (A01641742)
 Date: April 3, 2023
 Description: This program converts a regular expression to a non-deterministic 
     finite automaton.
+Input example: A*010
 """
 
 import graphviz
