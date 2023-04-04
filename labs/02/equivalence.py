@@ -86,7 +86,7 @@ def connect_aceptance_states():
         states.add((state, end_state, epsilon))
 
 
-def make_dfa(regex):
+def make_nfa(regex):
     for character in regex:
         if character == '(':
             add_state_in_open_parenthesis()
@@ -107,7 +107,9 @@ def analyze(regex):
     global states
     states.add((start_state, current_state, epsilon))
     if is_valid(regex):
-        return make_dfa(regex)
+        nfa = make_nfa(regex)
+        print(nfa)
+        return nfa
     print("The regex is not valid")
     return states
 
@@ -126,7 +128,6 @@ def main():
     #regex = input("Eneter the regular expression: ")
     regex = "(ab U b)*"
     dfa = analyze(regex)
-    print(dfa)
     plot(dfa)
 
 if __name__ == "__main__":
