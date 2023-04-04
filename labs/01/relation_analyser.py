@@ -1,4 +1,4 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+import graphviz 
 
 def analyze(val):
     """
