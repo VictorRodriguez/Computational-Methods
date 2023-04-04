@@ -1,6 +1,4 @@
 # Ingrid González A01641116
-
-# code not working properly
 import graphviz
 
 class NFA:
