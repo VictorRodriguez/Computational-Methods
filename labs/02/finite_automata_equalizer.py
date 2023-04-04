@@ -8,6 +8,29 @@ Description: This program converts a regular expression to an NFA,
 
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
+#classes for the NFA
+class NFA: 
+        def __init__(self, start, end):
+            self.start = start
+            self.end = end
+
+class Fragment: 
+      def __init__(self, start, end):
+         self.start = start
+         self.end = end
+
+class State:   
+   def __init__(self, state_id):
+      self.state_id = state_id
+      self.transitions = {}
+
+   def add_transition(self, state, symbol=None):
+      if symbol in self.transitions:
+            self.transitions[symbol].add(state)
+      else:
+            self.transitions[symbol] = {state}
+
+
 def add_point_operator(regex):
    #add points to make the concatenation explicit
    new_regex = ""
@@ -36,9 +59,9 @@ def parse_regex(regex):
    output = []
 
    for token in regex:
-      if token in 'ab01AE':
+      if token in 'ab01AE': 
          output.append(token)
-      elif token == '(':
+      elif token == '(': 
          operator_stack.append(token)
       elif token == ')':
          while operator_stack[-1] != '(':
@@ -54,15 +77,11 @@ def parse_regex(regex):
 
    return ''.join(output)
 
-def evaluate_regex(regex):
-    print("hello world")
-    class NFA:
-        def __init__(self, start, end):
-            self.start = start
-            self.end = end
-
+def evaluate_regex(regex): #converts a regular expression to an NFA
+    
     def build_fragment(token, state_counter):
-      if token == 'U':
+
+      if token == 'U': #union
          second_fragment = stack.pop()
          first_fragment = stack.pop()
          start = State(state_counter)
@@ -73,12 +92,14 @@ def evaluate_regex(regex):
          first_fragment.end.add_transition(end)
          second_fragment.end.add_transition(end)
          return Fragment(start, end), state_counter
-      elif token == '.':
+      
+      elif token == '.': #concatenation 
          second_fragment = stack.pop()
          first_fragment = stack.pop()
          first_fragment.end.add_transition(second_fragment.start)
          return Fragment(first_fragment.start, second_fragment.end), state_counter
-      elif token == '*':
+      
+      elif token == '*': #kleene star
          fragment = stack.pop()
          start = State(state_counter)
          end = State(state_counter + 1)
@@ -88,30 +109,14 @@ def evaluate_regex(regex):
          fragment.end.add_transition(fragment.start)
          fragment.end.add_transition(end)
          return Fragment(start, end), state_counter
-      else:
+      
+      else: #token is a symbol
          state1 = State(state_counter)
          state2 = State(state_counter + 1)
          state_counter += 2
          state1.add_transition(state2, token)
          return Fragment(state1, state2), state_counter
-
-
-    class Fragment:
-        def __init__(self, start, end):
-            self.start = start
-            self.end = end
-
-    class State:
-        def __init__(self, state_id):
-            self.state_id = state_id
-            self.transitions = {}
-
-        def add_transition(self, state, symbol=None):
-            if symbol in self.transitions:
-                self.transitions[symbol].add(state)
-            else:
-                self.transitions[symbol] = {state}
-    
+      
     stack = []
     state_counter = 0
     for token in regex:
@@ -124,47 +129,42 @@ def view_nfa(nfa):
     g = graphviz.Digraph('NFA')
     states = set()
     queue = [nfa.start]
+
     while queue:
         state = queue.pop()
         if state not in states:
             states.add(state)
             if state == nfa.start:
-                g.node(str(state.state_id), shape='circle', style='bold', label='start')
+                g.node(str(state.state_id), shape='circle', style='bold', label='start', color='red')
             elif state == nfa.end:
-                g.node(str(state.state_id), shape='doublecircle', style='bold', label='end')
+                g.node(str(state.state_id), shape='doublecircle', style='bold', label='end', color = 'red')
             else:
-                g.node(str(state.state_id), shape='circle', label=str(state.state_id))
+                g.node(str(state.state_id), shape='circle', label=str(state.state_id), color = 'blue')
             for symbol, destinations in state.transitions.items():
                 for destination in destinations:
                     queue.append(destination)
                     if symbol is None:
                         g.edge(str(state.state_id), str(destination.state_id), label='E')
                     else:
-                        g.edge(str(state.state_id), str(destination.state_id), label=symbol)
+                        g.edge(str(state.state_id), str(destination.state_id), label=symbol, color = 'blue')
     return g
 
          
 #Alphabet: {a, b} or {0,1}
 #Alphabet symbol: A
 #Empty symbol: E
-#operators: *, ., u
-#regex examples: (ab)*b, (ab U a)*, a*b*, aba U bab, a(ba)* b, (E  a)b, a* U b*
+#operators: *, ., U
+#regex examples: (ab)*b, (ab U a)*, a*b*, aba U bab, a(ba)* b, a* U b* , (a U b)* aba
 
 def main():
-   # regex = input("Enter a regular expression: ")
-   regex =  "ab U b*"#"aba U bab"#"(ab u a)*" #"a(ba)*b" 
+   regex = input("Enter a regular expression: ")
+   #regex =  "(ab U a)*"
    regex = regex.replace(' ', '')  # remove spaces
    regex = add_point_operator(regex)
-   print(regex)
    postfix = parse_regex(regex) #shunting yard algorithm
    nfa = evaluate_regex(postfix)
    g = view_nfa(nfa)
    g.render('nfa.gv', view=True)
-
-
-   print(postfix)
-
-
 
 if __name__ == "__main__":
     main()
