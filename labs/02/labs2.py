@@ -84,8 +84,12 @@ class NFA:
         if self.endStates[0].isAccepted:
             d.node(str(self.endStates[0].label), shape='doublecircle')
 
-        # Color the start state
-        d.node(str(self.startState.label), color='blue')
+        # Add a transition to the start state
+        d.node("", shape='none')
+        d.edge("", str(self.startState.label))
+
+        # The graph should be horizontal
+        d.graph_attr['rankdir'] = 'LR'
         
         for i in self.transitions:
             for j in self.transitions[i]:
