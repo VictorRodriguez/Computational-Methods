@@ -4,44 +4,52 @@
 #Lab02: EQUIVALENCE WITH FINITE AUTOMATA
 
 #Definition of classes: RegularExpression, State
+from graphviz import Digraph
 
 class RegularExpression:
+  """Clase para representar una expresión regular."""
   def __init__(self, expression):
     self.expression = expression
 
+
 class State:
+  """Clase para representar un estado en un autómata finito."""
   def __init__(self, name, transitions):
     self.name = name
     self.transitions = transitions
+
 
 def equivalence(reg):
   i_state = State(0, {})
   f_state = State(1, {})
   curr_state = i_state
-  state_counter = 1
+  index = 1
   for symb in reg:
     if symb == '(':
       new_initial_state, new_final_state = equivalence(reg)
       curr_state.transitions[''] = new_initial_state
       new_final_state.transitions[''] = f_state
       curr_state = new_final_state
+      pass
     elif symb == ')':
       break
+      pass
     elif symb == '*':
-      new_initial_state = State(state_counter, {})
-      state_counter += 1
-      new_final_state = State(state_counter, {})
-      state_counter += 1
+      new_initial_state = State(index, {})
+      index += 1
+      new_final_state = State(index, {})
+      index += 1
       new_initial_state.transitions[''] = curr_state
       curr_state.transitions[''] = new_final_state
       new_initial_state.transitions[''] = new_final_state
       new_final_state.transitions[''] = new_initial_state
       curr_state = new_final_state
+      pass
     elif symb == '|':
-      new_initial_state = State(state_counter, {})
-      state_counter += 1
-      new_final_state = State(state_counter, {})
-      state_counter += 1
+      new_initial_state = State(index, {})
+      index += 1
+      new_final_state = State(index, {})
+      index += 1
       old_initial_state = i_state
       i_state = new_initial_state
       old_final_state_transitions = f_state.transitions
@@ -52,14 +60,40 @@ def equivalence(reg):
       new_initial_state.transitions[''] = curr_state
       curr_state.transitions[''] = f_state
       curr_state = new_final_state
+      pass
     else:
-      next_state = State(state_counter, {})
-      state_counter += 1
+      next_state = State(index, {})
+      index += 1
       curr_state.transitions[symb] = next_state
       curr_state = next_state
 
-  f_state.name = state_counter
-  curr_state.transitions[''] = final_state
+      
+  f_state.name = index
+  curr_state.transitions[''] = f_state
   return i_state, f_state
 
-initial_state, final_state = equivalence("(ab ∪ a)*")
+def graph(i_state, f_state, log_file):
+  dot = Digraph(comment='NFA')
+  states = set()
+  queue = [i_state]
+  while queue:
+    state = queue.pop()
+    states.add(state)
+    for symbol, next_state in state.transitions.items():
+      dot.edge(state.name, next_state.name, label=symbol)
+      if next_state not in states:
+        queue.append(next_state)
+    for state in states:
+      if state == i_state:
+        dot.node(state.name, shape='doublecircle')
+      elif state == f_state:
+        dot.node(state.name, shape='doublecircle')
+      else:
+        dot.node(state.name)
+    with open(log_file, 'w') as file:
+      file.write(dot.source)
+    return dot.source
+
+i_state, f_state = equivalence("(ab ∪ a)*")
+
+print(graph(i_state, f_state, "nfa.log"))
