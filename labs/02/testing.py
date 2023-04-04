@@ -1,15 +1,3 @@
-# Lab 2: Regular Expressions and Nondeterministic Finite Automata
-# Author: Israel Vidal Paredes
-import graphviz
-
-class NFA:
-    def __init__(self):
-        self.states = set()
-        self.alphabet = set()
-        self.transition_function = {}
-        self.start_state = None
-        self.accept_states = set()
-
 
 def insert_concatenation_operator(regex: str) -> str:
     output = []
@@ -19,8 +7,8 @@ def insert_concatenation_operator(regex: str) -> str:
             output.append('.')
     return ''.join(output)
 
+
 def infix_to_postfix(infix: str) -> str:
-    # Implementation of the Shunting Yard Algorithm to convert infix to postfix
     output = []
     stack = []
     precedence = {'*': 100, '+': 10, '.': 1}
@@ -44,19 +32,12 @@ def infix_to_postfix(infix: str) -> str:
         postfix = postfix[:-1]
     return postfix
 
-def thompson_construction(postfix_regex: str) -> NFA:
-    # TODO: Implement Thompson's Construction Algorithm for NFAs
 
-def to_dot(nfa: NFA) -> str:
-    # TODO: Generate DOT language string for Graphviz
-
+# main function
 def main():
-    regex = input("Enter a regex in infix notation using only 'a', 'b', '(', ')', '|', '.', and '*': ")
-    postfix_regex = infix_to_postfix(regex)
-    nfa = thompson_construction(postfix_regex)
-    dot_graph = to_dot(nfa)
-    graph = graphviz.Source(dot_graph)
-    graph.view()
-
+    regex = insert_concatenation_operator(input("Enter a regex in infix notation using only 'a', 'b', '(', ')', '+', '.', and '*': "))
+    print(regex)
+    print(infix_to_postfix(regex))
+    
 if __name__ == '__main__':
     main()
