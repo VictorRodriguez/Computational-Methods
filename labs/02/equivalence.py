@@ -90,15 +90,15 @@ def make_nfa(regex):
     for character in regex:
         if character == '(':
             add_state_in_open_parenthesis()
-        if character in alphabet:
+        elif character in alphabet:
             add_state_in_letter(character)
-        if character == 'U':
+        elif character == 'U':
             add_states_in_union()
-        if character == '*':
+        elif character == '*':
             add_states_in_star()
-        if character == '+':
+        elif character == '+':
             add_state_in_plus()
-        if character == ')':
+        elif character == ')':
             add_states_in_close_parenthesis()
     connect_aceptance_states()
     return states
