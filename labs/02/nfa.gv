@@ -1,0 +1,16 @@
+digraph G {
+	node [shape=doublecircle]
+	end
+	node [shape=circle]
+	rankdir=LR
+	1 -> 2 [label=a]
+	0 -> 3 [label=E]
+	3 -> 4 [label=b]
+	4 -> 5 [label=E]
+	5 -> end [label=E]
+	5 -> 0 [label=E]
+	2 -> 5 [label=E]
+	start -> 0 [label=E]
+	0 -> 5 [label=E]
+	0 -> 1 [label=E]
+}
