@@ -51,7 +51,6 @@ for i in nivel_nfa:
     if i != []:
         print("Nivel: " + str(nivelCont))
         print(i)
-    
-    
-# Falta terminar el parsing de matriz de listas al formato de NFA de graphviz
-# Planeo terminarlo mañana a primera hora
+
+# Falta la logica que conecta los niveles con las flechas de los nodos
+# graphviz sigue sin funcionar, entonces no sé que tan inecesariamente complicado lo estoy haciendo
