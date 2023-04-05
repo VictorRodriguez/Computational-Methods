@@ -1,10 +1,13 @@
 from collections import deque
 import graphviz as pgv
 
-expression = "ba U (ab U (a U b)) U (a U b)*"
+expression = "ba U (ab U (a U (a U b) U (ba U a) U (ba U a))) U (a U b)*"
 stack = deque()
 temp_nfa = []
 current_nfa = []
+nivel_nfa = [[]]
+niveles_nfa = []
+nivel = 0
 
 for i in expression:
     if i == "(":
@@ -18,14 +21,37 @@ for i in expression:
     elif not i.isspace():
         current_nfa.append(i)
 
-cont = 0;
-for j in current_nfa:
-    for k in range(len(j)):
-        if(j[k]== "a" or j[k] == "b"):
-            cont += 1
 
+def nfa_to_graphviz(nfa, nivel):
+    nivel = nivel + 1
+    nivel_nfa.append([])
+    cont = 0;
+    niveles_nfa.append('1')
+    nivelStr = "lvl " + str(nivel) + "." + niveles_nfa[nivel-1]
+    if nivelStr  in nivel_nfa[nivel-1]:
+        niveles_nfa[nivel-1] = str(int(niveles_nfa[nivel-1])+1)  
+    nivel_nfa[nivel-1].append("lvl " + str(nivel) + "." + niveles_nfa[nivel-1])
         
-    print(j)
+    for i in nfa:
+        if isinstance(i, list) == False:
+            nivel_nfa[nivel-1].append(i)
+        if isinstance(i, list):
+                cont = cont + 1
+                niveles_nfa[nivel-1] =  str(cont)
+                nivel_nfa[nivel-1].append("Nivel " + str(nivel + 1) + "." + str(cont))
+    for j in nfa:
+        if isinstance(j, list):
+            nfa_to_graphviz(j, nivel)
+
+
+nfa_to_graphviz(current_nfa, nivel)
+nivelCont = 0
+for i in nivel_nfa:
+    nivelCont = nivelCont + 1
+    if i != []:
+        print("Nivel: " + str(nivelCont))
+        print(i)
+    
     
 # Falta terminar el parsing de matriz de listas al formato de NFA de graphviz
 # Planeo terminarlo mañana a primera hora
