@@ -1,0 +1,12 @@
+digraph {
+	6 [shape=doublecircle]
+	5 [color=red]
+	0 -> 1 [label=a]
+	1 -> 2 [label=E]
+	2 -> 3 [label=b]
+	2 -> 4 [label=E]
+	3 -> 2 [label=E]
+	3 -> 6 [label=E]
+	4 -> 6 [label=E]
+	5 -> 0 [label=E]
+}
