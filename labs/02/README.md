@@ -24,7 +24,7 @@ We build up from the smallest subexpressions to larger subexpressions until we
 have an NFA for the original expression, as shown in the following diagram
 
 
-Output:
+Output (does not correspond to (ab ∪ a)*  regex):
 
 ```graphviz
 digraph finite_state_machine {
@@ -54,4 +54,6 @@ digraph finite_state_machine {
 To be tested in https://dreampuf.github.io/GraphvizOnline/
 
 
-![test](test.svg)
+<img width="768" alt="image" src="https://user-images.githubusercontent.com/327548/225399535-510665a4-45ce-4b3b-ae93-b87980456b98.png">
+
+
