@@ -27,11 +27,13 @@ Create a program in LEX and YACC that analyise the CFG:
 Example of Input file :
 
 ```
+
 a boy sees
 the boy sees a flower
 a girl with a flower likes the boy
 a flower sees a flower
 ```
+
 
 Each of these strings has a derivation in grammar
 
