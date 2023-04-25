@@ -1,6 +1,5 @@
 %{
 #include "y.tab.h"
-extern int yylval;
 %}
 %%
 "a"|"the"			 return ARTICLE; 
@@ -8,6 +7,6 @@ extern int yylval;
 "boy"|"girl"|"flower"		 return NOUN; 
 "touches"|"likes"|"sees"	 return VERB; 
 [ \t] ; 			/* ignore whitespace */
-\n return 0; 		/* logical EOF */
+[\n]  ; 		return EOL;
 . return yytext[0];
 %%

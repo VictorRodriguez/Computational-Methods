@@ -1,1 +1,4 @@
-the boy likes the girl
+a boy sees
+the boy sees a flower
+a girl with a flower likes the boy
+a flower sees a flower

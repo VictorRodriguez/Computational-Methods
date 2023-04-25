@@ -1,16 +1,23 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 int yylex();
 void yyerror(const char *s);
 extern FILE *yyin;
 %}
 
-%token ARTICLE NOUN VERB PREP
+%token ARTICLE NOUN VERB PREP EOL
 %%
 
-sentence: nounPhrase verbPhrase		{printf("Valid Sentence\n");}
+sentences: sentence                  {printf("PASS\n");}
+ | sentences EOL sentences
+ | sentences EOL
+ ;
+
+sentence: nounPhrase verbPhrase		
 ;
+
 nounPhrase: cmplxNoun
  | cmplxNoun prepPhrase
 ;
@@ -28,6 +35,10 @@ cmplxVerb: VERB
 %%
 
 int main(int argc, char **argv) {
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
     if (argc > 1) {
         yyin = fopen(argv[1], "r");
         if (yyin == NULL) {
@@ -36,9 +47,8 @@ int main(int argc, char **argv) {
         }
     }
     yyparse();
-    return 0;
 }
 
 void yyerror(const char *s) {
-    fprintf(stderr, "%s\n", s);
+    printf("FAIL\n");
 }
