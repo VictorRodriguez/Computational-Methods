@@ -25,9 +25,6 @@ def plot(val):
         g.edge(str(pair[0]), str(pair[1]), label="a" if pair[2] == 0 else "b")
     g.view()
 
-
-
-
 def main():
     # Regex examples:
     # (ab)*b
