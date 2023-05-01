@@ -11,7 +11,11 @@ extern FILE *yyin;
 
 %%
 
-sentence: nounPhrase verbPhrase EOL { printf("PASS\n"); }
+sentences: sentence { printf("PASS\n"); }
+ | sentences EOL 
+ | sentences EOL sentences 
+ ;
+sentence: nounPhrase verbPhrase
 	 ;
 
 nounPhrase: cmplxNoun | cmplxNoun prepPhrase 
