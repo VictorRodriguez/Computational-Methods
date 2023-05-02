@@ -4,11 +4,16 @@
 
 %%
 
-a | the { return ARTICLE; }
+a | 
+the { return ARTICLE; }
 
-boy | girl | flower { return NOUN;}
+boy |
+girl | 
+flower { return NOUN;}
 
-touches | likes | sees { return VERB;}
+touches | 
+likes | 
+sees { return VERB;}
 
 with { return PREP;}
 
