@@ -17,24 +17,22 @@ sentences: sentence	{ printf("PASS\n"); }
          | sentences EOL
          ;
 
-sentence: noun_phrase verb_phrase EOL		
+sentence: noun_phrase verb_phrase		
 ;
 
-noun_phrase: complex_noun
-    | complex_noun prep_phrase
+noun_phrase: complex_noun | complex_noun prep_phrase
 ;
 
-verb_phrase: complex_verb
-    | complex_verb prep_phrase
+verb_phrase: complex_verb | complex_verb prep_phrase
+;
+
+prep_phrase: PREP complex_noun
 ;
 
 complex_noun: ARTICLE NOUN
 ;
 
-complex_verb: VERB noun_phrase
-;
-
-prep_phrase: PREP complex_noun
+complex_verb: VERB | VERB noun_phrase
 ;
 
 %%
@@ -45,7 +43,7 @@ void yyerror(const char *s){
 
 int main(int argc, char **argv){
     if (argc != 2){
-        printf("Couldn't Open File: \n")
+        printf("Couldn't Open File: \n");
         fprintf(stderr, "Missing: %s <filename>\n", argv[0]);
         exit(1);
     }
@@ -58,6 +56,7 @@ int main(int argc, char **argv){
     yyin = input;
     yyparse();
     fclose(input);
+
 
     return 0;
 }
