@@ -56,9 +56,10 @@ def plot(val):
 
 def main():
     print("Hello World analyzing input!")
-    graph = set(eval(input("Enter your set: ")))
-    print(graph)
-    #graph = { (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }
+    #graph = set(eval(input("Enter your set: ")))
+    #print(graph)
+    graph = { (0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3) }
+    #graph = { (0,0) , (1,1), (0,1), (1,0), (1,2) }
     reflexive, symmetric, transitive = analyze(graph)
     
     if reflexive and symmetric and transitive:
@@ -71,7 +72,7 @@ def main():
     2. Symmetric: {symmetric} \
     3. Transitive: {transitive}\
     4. Equivalence relation: {equivalence}")        
-    plot(graph)
+    #plot(graph)
 
 if __name__ == "__main__":
     main()
