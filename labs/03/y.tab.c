@@ -1538,21 +1538,35 @@ yyreturn:
 
 extern FILE *yyin;
 
-main()
+main(int argc, char *argv[])
 {
-    // ./analyze < test.txt
+    if (argc < 2)
+    {
+        printf("[!] Insufficient arguments!\n");
+        printf("[!] Correct ussage: ./analyzer test.txt\n");
+        return 1;
+    }
+
+    FILE *fp = fopen(argv[1], "r");
+
+    if (fp == NULL)
+    {
+        printf("[!] Error opening file: %s\n", argv[1]);
+        return 1;
+    }
     
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
 
-    while ((read = getline(&line, &len, stdin)) != -1)
+    while ((read = getline(&line, &len, fp)) != -1)
     {
         yy_scan_string(line);
         yyparse();
     }
     
     free(line);
+    fclose(fp);
 }
 
 yyerror(char *s)
