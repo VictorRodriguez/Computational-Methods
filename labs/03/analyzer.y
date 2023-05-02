@@ -2,6 +2,13 @@
 
 #include <stdio.h>
 
+int yylex(void);
+int yyparse(void);
+int yy_scan_string(char *);
+void yyerror(char *);
+
+extern FILE *yyin;
+
 %}
 
 %token ARTICLE NOUN VERB PREP EOL
@@ -34,9 +41,7 @@ cmplx_verb : VERB
 
 %%
 
-extern FILE *yyin;
-
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -45,9 +50,9 @@ main(int argc, char *argv[])
         return 1;
     }
 
-    FILE *fp = fopen(argv[1], "r");
+    FILE *input = fopen(argv[1], "r");
 
-    if (fp == NULL)
+    if (input == NULL)
     {
         printf("[!] Error opening file: %s\n", argv[1]);
         return 1;
@@ -57,17 +62,21 @@ main(int argc, char *argv[])
     size_t len = 0;
     ssize_t read;
 
-    while ((read = getline(&line, &len, fp)) != -1)
+    while ((read = getline(&line, &len, input)) != -1)
     {
+        if (line[read - 1] != '\n')
+        {
+            strncat(line, "\n", 1);
+        }
         yy_scan_string(line);
         yyparse();
     }
     
     free(line);
-    fclose(fp);
+    fclose(input);
 }
 
-yyerror(char *s)
+void yyerror(char *s)
 {
     printf("FAIL\n");
 }

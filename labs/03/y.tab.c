@@ -89,6 +89,13 @@
 
 #include <stdio.h>
 
+int yylex(void);
+int yyparse(void);
+int yy_scan_string(char *);
+void yyerror(char *);
+
+extern FILE *yyin;
+
 
 
 /* Enabling traces.  */
@@ -122,7 +129,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 126 "y.tab.c"
+#line 133 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -407,8 +414,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    11,    11,    14,    17,    18,    21,    22,    25,    28,
-      31,    32
+       0,    18,    18,    21,    24,    25,    28,    29,    32,    35,
+      38,    39
 };
 #endif
 
@@ -1313,13 +1320,13 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 11 "analyzer.y"
+#line 18 "analyzer.y"
     { printf("PASS\n"); }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1323 "y.tab.c"
+#line 1330 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1533,12 +1540,10 @@ yyreturn:
 }
 
 
-#line 35 "analyzer.y"
+#line 42 "analyzer.y"
 
 
-extern FILE *yyin;
-
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
@@ -1547,9 +1552,9 @@ main(int argc, char *argv[])
         return 1;
     }
 
-    FILE *fp = fopen(argv[1], "r");
+    FILE *input = fopen(argv[1], "r");
 
-    if (fp == NULL)
+    if (input == NULL)
     {
         printf("[!] Error opening file: %s\n", argv[1]);
         return 1;
@@ -1559,17 +1564,21 @@ main(int argc, char *argv[])
     size_t len = 0;
     ssize_t read;
 
-    while ((read = getline(&line, &len, fp)) != -1)
+    while ((read = getline(&line, &len, input)) != -1)
     {
+        if (line[read - 1] != '\n')
+        {
+            strncat(line, "\n", 1);
+        }
         yy_scan_string(line);
         yyparse();
     }
     
     free(line);
-    fclose(fp);
+    fclose(input);
 }
 
-yyerror(char *s)
+void yyerror(char *s)
 {
     printf("FAIL\n");
 }
