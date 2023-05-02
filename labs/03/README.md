@@ -46,4 +46,15 @@ PASS
 PASS
 FAIL
 ```
+## Student notes:
+For the last test, the program should pass because the sentence could also be constructed using the context free grammar. The sentence "a flower sees a flower" can be constructed using the following derivation:
 
+```
+1. a flower sees a flower
+2. <ARTICLE> <NOUN> <VERB> <ARTICLE> <NOUN>
+3. <CMPLX-NOUN> <VERB> <CMPLX-NOUN>
+4. <NOUN-PHRASE> <VERB> <NOUN-PHRASE>
+5. <NOUN-PHRASE> <CMPLX-VERB>
+6. <NOUN-PHRASE> <VERB-PHRASE>
+7. <SENTENCE>
+```
