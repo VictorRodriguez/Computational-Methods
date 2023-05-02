@@ -7,6 +7,7 @@ void yyerror(const char *s);
 extern FILE *yyin;
 %}
 
+
 %token ARTICLE NOUN VERB PREP EOL
 
 %%
@@ -16,7 +17,7 @@ sentences: sentence	{ printf("PASS\n"); }
          | sentences EOL
          ;
 
-sentence: noun_phrase verb_phrase		
+sentence: noun_phrase verb_phrase EOL		
 ;
 
 noun_phrase: complex_noun
@@ -30,13 +31,11 @@ verb_phrase: complex_verb
 complex_noun: ARTICLE NOUN
 ;
 
-complex_verb: VERB
-    | VERB noun_phrase
+complex_verb: VERB noun_phrase
 ;
 
 prep_phrase: PREP complex_noun
 ;
-
 
 %%
 
