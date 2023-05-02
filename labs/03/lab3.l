@@ -1,19 +1,16 @@
 %{
-
-/*************************** Lab 03 ***************************
- 
-Nolberto Castro Sánchez
-
-⟨SENTENCE⟩ → ⟨NOUN-PHRASE⟩⟨VERB-PHRASE⟩ ⟨NOUN-PHRASE⟩ → ⟨CMPLX-NOUN⟩ | 
-⟨CMPLX-NOUN⟩⟨PREP-PHRASE⟩
-⟨VERB-PHRASE⟩ → ⟨CMPLX-VERB⟩ | ⟨CMPLX-VERB⟩⟨PREP-PHRASE⟩ ⟨PREP-PHRASE⟩ → 
-⟨PREP⟩⟨CMPLX-NOUN⟩
-⟨CMPLX-NOUN⟩ → ⟨ARTICLE⟩⟨NOUN⟩ ⟨CMPLX-VERB⟩ → ⟨VERB⟩ | 
-⟨VERB⟩⟨NOUN-PHRASE⟩
-⟨ARTICLE⟩ → a | the
-⟨NOUN⟩ → boy | girl | flower
-⟨VERB⟩ → touches | likes | sees 
-⟨PREP⟩ → with
-
-***************************************************************/
+#include "y.tab.h"
 %}
+
+%%
+
+a|the               {return ARTICLE;}
+boy|girl|flower     {return NOUN;}
+touches|likes|sees  {return VERB;}
+with                {return PREP;}
+
+[ \t]               {;} 			
+\n                  {return EOL;} 		
+.                   {}
+
+%%
