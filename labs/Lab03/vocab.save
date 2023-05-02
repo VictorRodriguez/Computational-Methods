@@ -1,0 +1,14 @@
+%{
+#include "y.tab.h"
+extern int yylval;
+%}
+
+%%
+a|the			{yylval= yytext[0] - 'a'; return ARTICLE;}	
+boy|girl|flower		
+touches|likes|sees	printf("VERB\n");
+with			printf("PREP\n");
+[ \t];
+\n return 0;
+
+%%

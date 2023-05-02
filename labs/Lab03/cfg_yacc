@@ -1,0 +1,41 @@
+%{
+#include <stdio.h>
+int yylex();
+void yyerror (const char *s) {printf("FAIL\n");};
+extern FILE *yyin;
+%}
+
+%token ARTICLE NOUN VERB PREP
+
+
+%%
+
+sentence: nounPhrase  verbPhrase {printf("PASS\n");};
+
+nounPhrase: cmplxNoun 
+		| cmplxNoun prepPhrase;
+
+verbPhrase: cmplxVerb
+		| cmplxVerb prepPhrase;
+
+prepPhrase: PREP cmplxNoun;
+
+cmplxNoun: ARTICLE NOUN;
+
+cmplxVerb: VERB 
+		|VERB nounPhrase;
+
+
+%%
+
+int main (int argc, char **argv)
+{
+	FILE *fd;
+	fd=fopen(argv[1],"r");
+	yyin=fd;
+	for (int i=0; i<4; i++)
+	{
+		yyparse();
+		
+	}
+}
