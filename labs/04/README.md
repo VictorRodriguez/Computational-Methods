@@ -46,4 +46,13 @@ Deliverables:
 * Deliverable 3: YACC grammar
 * Deliverable 4: Report in PDF generate from the README of your project
 
+## Deliverable 4
 
+Deliver a PDF document generated based on the README.md file of this directory with the next parts: 
+
+* Description of the problem
+* Link to the Github project
+* Definition of automata that specifies the logic of CPU
+* Definition of CFG and Lexemas
+* List of sample inputs to be detected or rejected
+* Link to video recording that shows the execution and testing
