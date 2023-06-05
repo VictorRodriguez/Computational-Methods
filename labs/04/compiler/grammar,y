@@ -1,21 +1,66 @@
 %{
 #include <stdio.h>
-int yylex();
+extern int yylex();
+extern int yyparse();
+extern FILE *yyin;
 void yyerror(const char *s);
+FILE *asmFile;
 %}
 
+%union{
+        int block;
+        int degree;
+}
 
-%token NAME NUMBER
+%token ROBOT PLEASE MOVE TURN AND THEN COMMA BLOCKS DEGREES AHEAD EOL
+%token <block> BLOCK
+%token <degree> DEGREE
 %%
 
-statement: NAME '=' expression		{printf("= %d\n", $3);}
- | expression 						{printf("= %d\n", $1);}
- ;
-expression: expression '+' NUMBER   { $$ = $1 + $3;}
- | expression '-' NUMBER            { $$ = $1 - $3;}
- | expression '*' NUMBER            { $$ = $1 * $3;}
- | '(' expression ')'				{$$ = $2;}
- | NUMBER                           {$$ = $1;}
- ;
+sentence_list :
+              | sentence_list sentence
+              ;
 
+sentence : ROBOT PLEASE action EOL
+         | error EOL { printf("ERROR\n"); yyerrok;}
+         ;
 
+action : verb
+       | verb plus
+       ;
+
+verb : MOVE BLOCK BLOCKS AHEAD {fprintf(asmFile, "MOV,%d\n", $2);}
+     |  TURN DEGREE DEGREES     {fprintf(asmFile, "TURN,%d\n", $2);}
+     ;
+
+plus : AND THEN action
+     | COMMA THEN action
+     ;
+
+%%
+
+int main(int argc, char **argv) {
+
+    FILE *file = fopen(argv[1], "r");
+    if (!file) {
+        fprintf(stderr, "ERROR, FILE NOT FOUND ...\n");
+        return 1;
+        }
+
+        asmFile = fopen("instructions.asm", "w");  // Abrir el archivo ASM en modo escritura
+        if (!asmFile) {
+        fprintf(stderr, "No se pudo abrir el archivo.\n");
+        fclose(file);
+        return 1;
+        }
+
+    yyin = file;
+        yyparse();
+
+    fclose(file);
+    fclose(asmFile);  // Cerrar el archivo ASM
+    return 0;
+}
+
+void yyerror(const char *s){
+}
