@@ -28,7 +28,7 @@ junction_phrase: JUNCTION action_phrase
 ;
 
 maction : MOVE NUMBER BLOCKS DIRECTION              {fprintf(asmFile, "MOV, %d\n", $2); printf("MOV, %d\n", $2);}
-| MOVE DEGREES BLOCKS DIRECTION                     {fprintf(asmFile, "MOV, %d\n", $2); printf("MOV, %d\n", $2);}
+| MOVE DEGREES_NUM BLOCKS DIRECTION                     {fprintf(asmFile, "MOV, %d\n", $2); printf("MOV, %d\n", $2);}
 ;
 
 taction: TURN DEGREES_NUM DEGREES                   {fprintf(asmFile, "TURN, %d\n", $2); printf("TURN, %d\n", $2);}
