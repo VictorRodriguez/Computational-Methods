@@ -9,3 +9,4 @@ clean:
 	rm -rf y.tab.c
 	rm -rf y.tab.h
 	rm -rf y.tab.h.gch
+	rm -rf *.asm
