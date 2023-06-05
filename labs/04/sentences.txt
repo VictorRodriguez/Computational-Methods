@@ -1,0 +1,5 @@
+Robot please move 2 blocks ahead
+Robot please turn 90 degrees and then move 4 blocks ahead
+turn 90 degrees
+Robot moves 2 blocks
+Robot moves 2 blocks quickly
