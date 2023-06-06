@@ -36,9 +36,6 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "ERROR, FILE NOT FOUND ...\n");
         return 1;
     }
-    else{
-    	printf("hi");
-    }
 
     yyin = file;
     yyparse();
