@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 extern int yylex();
+extern FILE *yyin;
 void yyerror(const char *s);
 %}
 
@@ -25,7 +26,7 @@ TURN_CMD:	VERB INUM UNITS 		// "turn 180 degrees"
 PHRASE_CMD:	CONJUNCTION STRAIGHT_CMD // "and move..."
 		|CONJUNCTION TURN_CMD	// "and turn..."
 		|CONJUNCTION ADVERB STRAIGHT_CMD	// "and then move..."
-		|CONJUNSCTION ADVERB TURN_CMD	// "and then turn..."
+		|CONJUNCTION ADVERB TURN_CMD	// "and then turn..."
 %%
 
 int main(int argc, char* argv[]) {
