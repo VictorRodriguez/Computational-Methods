@@ -1,3 +1,5 @@
+Link to document: https://docs.google.com/document/d/1Eh-MqNHr-KgrOOIEoubuSE5VP5ep2cHFuiC_XAbwaPY/edit?usp=sharing
+
 # Deliverable 2: Lex analyzer
 
 Create a lex that detects thnks like 
