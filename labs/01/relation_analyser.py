@@ -12,6 +12,12 @@ def analyze(val):
     Transitive = False
 
     return Reflexive,Symmetric,Transitive
+    
+def formatInput(stringInput):
+	initStr = str(int(char) for char in fDescriptionString if char.isdigit())
+    
+def getAlphabet(fDescriptionString):
+	return numeric_set = {int(char) for char in fDescriptionString if char.isdigit()}
 
 def plot():
     """
@@ -25,6 +31,8 @@ def main():
     print("Hello World analyzing input!")
     val = input("Enter your set: ")
     print(val)
+    alphabet = getAlphabet(val)
+    print(alphabet)
     Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
     1. Reflexive: {Reflexive} \
