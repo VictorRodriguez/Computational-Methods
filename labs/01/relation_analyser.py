@@ -1,36 +1,55 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+# Práctica 1: Encontrar si un conjunto es reflexivo, simétrico o transitivo e imprimir el grafo correspondiente usando graphviz.
+# Jorge Emiliano Pomar Mendoza A01709338
 
-def analyze(val):
-    """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
-    """
-    Reflexive = False
-    Symmetric = False
-    Transitive = False
+import os
+import graphviz
 
-    return Reflexive,Symmetric,Transitive
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+def es_reflexivo(R):
+    for element in R:
+        if (element, element) not in R:
+            return False
+    return True
+
+
+def es_simetrico(R):
+    for element in R:
+        if (element[1], element[0]) not in R:
+            return False
+    return True
+
+
+def es_transitivo(R):
+    for element1 in R:
+        for element2 in R:
+            if element1[1] == element2[0] and (element1[0], element2[1]) not in R:
+                return False
+    return True
+
 
 def main():
-    print("Hello World analyzing input!")
-    val = input("Enter your set: ")
-    print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
-    print(f"\
-    1. Reflexive: {Reflexive} \
-    2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+    input_R = input("Introduce el conjunto R:")
+    R = eval(input_R)
 
-if __name__ == "__main__":
-    main()
+    if es_reflexivo(R):
+        print("El conjunto es reflexivo.")
+    else:
+        print("El conjunto no es reflexivo.")
+
+    if es_simetrico(R):
+        print("El conjunto es simétrico.")
+    else:
+        print("El conjunto no es simétrico.")
+
+    if es_transitivo(R):
+        print("El conjunto es transitivo.")
+    else:
+        print("El conjunto no es transitivo.")
+
+    dot = graphviz.Digraph(comment="Práctica 1")
+    for element in R:
+        dot.edge(str(element[0]), str(element[1]))
+    dot.render(os.path.join(os.path.dirname(__file__), "graph"), view=True)
+
+
+main()
