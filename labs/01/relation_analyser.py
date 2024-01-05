@@ -17,8 +17,9 @@ def formatInput(stringInput):
 	initStr = str(int(char) for char in fDescriptionString if char.isdigit())
     
 def getAlphabet(fDescriptionString):
-	return numeric_set = {int(char) for char in fDescriptionString if char.isdigit()}
-
+	numeric_set = {int(char) for char in fDescriptionString if char.isdigit()}
+	return numeric_set
+	
 def plot():
     """
     Here goes your code to do the plot of the set
