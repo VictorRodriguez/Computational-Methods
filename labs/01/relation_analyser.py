@@ -14,7 +14,8 @@ def analyze(val):
     return Reflexive,Symmetric,Transitive
     
 def formatInput(stringInput):
-	initStr = str(int(char) for char in fDescriptionString if char.isdigit())
+	initStr = ''.join(char for char in stringInput if char.isdigit())
+	return initStr
     
 def getAlphabet(fDescriptionString):
 	numeric_set = {int(char) for char in fDescriptionString if char.isdigit()}
@@ -33,6 +34,8 @@ def main():
     val = input("Enter your set: ")
     print(val)
     alphabet = getAlphabet(val)
+    teststr = formatInput(val)
+    print(teststr)
     print(alphabet)
     Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
