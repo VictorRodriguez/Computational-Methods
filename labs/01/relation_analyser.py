@@ -14,19 +14,21 @@ def analyze(val):
     return Reflexive,Symmetric,Transitive
     
 def formatInput(stringInput):
+	n = 2
 	initStr = ''.join(char for char in stringInput if char.isdigit())
-	return initStr
+	fList = [initStr[i:i+n] for i in range(0, len(initStr), n)]
+	return fList
     
 def getAlphabet(fDescriptionString):
 	numeric_set = {int(char) for char in fDescriptionString if char.isdigit()}
 	return numeric_set
 	
-def plot():
+def plot(stringListEdges):
     """
     Here goes your code to do the plot of the set
     """
     g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
+    g.edges(stringListEdges)
     g.view()
 
 def main():
@@ -34,15 +36,15 @@ def main():
     val = input("Enter your set: ")
     print(val)
     alphabet = getAlphabet(val)
-    teststr = formatInput(val)
-    print(teststr)
+    plotList = formatInput(val)
+    print(plotList)
     print(alphabet)
     Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
     3. Transitive: {Transitive}")
-    plot()
+    plot(plotList)
 
 if __name__ == "__main__":
     main()
