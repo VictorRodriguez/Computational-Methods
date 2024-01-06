@@ -122,7 +122,7 @@ def transitive_relations(relation_dict):
         for b in related_a:
             if b in relation_dict:
                 for c in relation_dict[b]:
-                    if (a == b or b == c or a == c):
+                    if a == b or b == c or a == c:
                         if check is False:
                             status = False
                         else:
