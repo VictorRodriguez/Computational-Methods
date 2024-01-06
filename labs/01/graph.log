@@ -4,9 +4,9 @@ digraph {
 	rankdir=LR
 	1 [fillcolor="#AFEEEE" shape=circle style=filled]
 	rankdir=LR
-	3 [fillcolor="#FFA500" shape=circle style=filled]
+	3 [fillcolor="#FFA07A" shape=circle style=filled]
 	rankdir=LR
-	2 [fillcolor="#FAF0E6" shape=circle style=filled]
+	2 [fillcolor="#98FB98" shape=circle style=filled]
 	0 -> 0
 	0 -> 1
 	0 -> 3

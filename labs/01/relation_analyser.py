@@ -77,7 +77,6 @@ def send_relation_dict(val):
 # FUNCTION: ANALYSE IF THE RELATION IS REFLEXIVE
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n*m)
 def reflexive_relations(relation_dict):
-
     status = False
     check = 0
 
@@ -123,11 +122,14 @@ def transitive_relations(relation_dict):
         for b in related_a:
             if b in relation_dict:
                 for c in relation_dict[b]:
-                    if c in relation_dict[a]:
+                    if (a == b or b == c or a == c):
+                        if check is False:
+                            status = False
+                        else:
+                            pass
+                    elif c in relation_dict[a]:
                         status = True
                         check = True
-                    elif a == b and check is False:
-                        status = False
                     else:
                         status = False
                         return status
