@@ -1,0 +1,18 @@
+digraph {
+	rankdir=LR
+	0 [fillcolor="#F0E68C" shape=circle style=filled]
+	rankdir=LR
+	1 [fillcolor="#AFEEEE" shape=circle style=filled]
+	rankdir=LR
+	3 [fillcolor="#FFA07A" shape=circle style=filled]
+	rankdir=LR
+	2 [fillcolor="#98FB98" shape=circle style=filled]
+	0 -> 0
+	0 -> 1
+	0 -> 3
+	1 -> 0
+	1 -> 1
+	2 -> 2
+	3 -> 0
+	3 -> 3
+}
