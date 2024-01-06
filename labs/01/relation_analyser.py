@@ -158,10 +158,12 @@ def plot(val):
     g = graphviz.Digraph(filename='graph.log')
     colors = ['#FFA07A', '#F0E68C', '#D8BFD8', '#98FB98', '#FAF0E6', '#AFEEEE', '#FFA500', '#FF69B4', '#DC143C',
               '#A9A9A9']
+
+    for j in nodes:
+        g.attr(rankdir='LR')
+        g.node(str(j), style='filled', fillcolor=random.choice(colors), shape='circle')
+
     for i in range(len(val)):
-        for j in nodes:
-            g.attr(rankdir='LR')
-            g.node(str(j), style='filled', fillcolor=random.choice(colors), shape='circle')
         if i % 2 == 0:
             g.edge(str(val[i]), str(val[i + 1]))
 

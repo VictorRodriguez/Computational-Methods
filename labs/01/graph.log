@@ -1,138 +1,18 @@
 digraph {
 	rankdir=LR
-	0 [fillcolor="#D8BFD8" shape=circle style=filled]
+	0 [fillcolor="#F0E68C" shape=circle style=filled]
 	rankdir=LR
-	1 [fillcolor="#FF69B4" shape=circle style=filled]
+	1 [fillcolor="#AFEEEE" shape=circle style=filled]
 	rankdir=LR
 	3 [fillcolor="#FFA500" shape=circle style=filled]
 	rankdir=LR
-	2 [fillcolor="#FFA500" shape=circle style=filled]
+	2 [fillcolor="#FAF0E6" shape=circle style=filled]
 	0 -> 0
-	rankdir=LR
-	0 [fillcolor="#DC143C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FFA07A" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FF69B4" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FAF0E6" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#FFA500" shape=circle style=filled]
 	0 -> 1
-	rankdir=LR
-	0 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#A9A9A9" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#FFA07A" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#A9A9A9" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#98FB98" shape=circle style=filled]
 	0 -> 3
-	rankdir=LR
-	0 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#A9A9A9" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#DC143C" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#FAF0E6" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#DC143C" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#98FB98" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#A9A9A9" shape=circle style=filled]
 	1 -> 0
-	rankdir=LR
-	0 [fillcolor="#DC143C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#AFEEEE" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#FFA07A" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#AFEEEE" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#98FB98" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#D8BFD8" shape=circle style=filled]
 	1 -> 1
-	rankdir=LR
-	0 [fillcolor="#AFEEEE" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#98FB98" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FAF0E6" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#AFEEEE" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#98FB98" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FAF0E6" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#FAF0E6" shape=circle style=filled]
 	2 -> 2
-	rankdir=LR
-	0 [fillcolor="#A9A9A9" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FF69B4" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#DC143C" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#98FB98" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#AFEEEE" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#FFA500" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#98FB98" shape=circle style=filled]
 	3 -> 0
-	rankdir=LR
-	0 [fillcolor="#DC143C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FFA07A" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#FAF0E6" shape=circle style=filled]
-	rankdir=LR
-	0 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FF69B4" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#F0E68C" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#FF69B4" shape=circle style=filled]
 	3 -> 3
-	rankdir=LR
-	0 [fillcolor="#FAF0E6" shape=circle style=filled]
-	rankdir=LR
-	1 [fillcolor="#FFA07A" shape=circle style=filled]
-	rankdir=LR
-	3 [fillcolor="#D8BFD8" shape=circle style=filled]
-	rankdir=LR
-	2 [fillcolor="#DC143C" shape=circle style=filled]
 }
