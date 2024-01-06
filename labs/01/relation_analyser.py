@@ -39,7 +39,7 @@ def main():
     plotList = formatInput(val)
     print(plotList)
     print(alphabet)
-    Reflexive,Symmetric,Transitive = analyze(val)
+    Reflexive,Symmetric,Transitive = analyze(plotList)
     print(f"\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
