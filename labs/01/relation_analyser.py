@@ -1,15 +1,25 @@
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
-def analyze(val):
+def analyze(val, alphabet):
     """
     Here goes your code to do the analysis
     1. Reflexive: aRa for all a in X,
     2. Symmetric: aRb implies bRa for all a,b in X
     3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
     """
+    reflexiveCheckboxes = [False] * len(alphabet)
+    symmetricCheckboxes = [False] * len(alphabet)
+    transitiveCheckboxes = [False] * len(alphabet)
+
+    
     Reflexive = False
     Symmetric = False
     Transitive = False
+    
+    for i in range(0,len(val)-1):
+	    if val[i][0] == val[i][1]:
+	        reflexiveCheckboxes[int(val[i][0])] = True
+		
 
     return Reflexive,Symmetric,Transitive
     
@@ -27,7 +37,7 @@ def plot(stringListEdges):
     """
     Here goes your code to do the plot of the set
     """
-    g = graphviz.Digraph('G', filename='hello.gv')
+    g = graphviz.Digraph('G', filename='graphOutput.gv')
     g.edges(stringListEdges)
     g.view()
 
@@ -37,9 +47,9 @@ def main():
     print(val)
     alphabet = getAlphabet(val)
     plotList = formatInput(val)
-    print(plotList)
-    print(alphabet)
-    Reflexive,Symmetric,Transitive = analyze(plotList)
+    print(plotList, "\n")
+    print(alphabet, "\n")
+    Reflexive,Symmetric,Transitive = analyze(plotList,alphabet)
     print(f"\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
