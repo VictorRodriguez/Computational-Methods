@@ -16,6 +16,8 @@ into a readable sequence.
 import graphviz  # https://graphviz.readthedocs.io/en/stable/index.html
 import random
 
+nodes = []
+
 
 # FUNCTIONS
 # FUNCTION: CONVERT LIST INTO TUPLES, REMOVES DUPLICATES, ORDERS TUPLES,
@@ -37,6 +39,11 @@ def transformation(val):
     tuples = [(val[i], val[i + 1]) for i in range(0, len(val), 2)]
     tuples = list(set(tuples))
     tuples.sort()
+
+    for i in range(len(val)):
+        if val[i] not in nodes:
+            nodes.append(val[i])
+
     return [item for tup in tuples for item in tup]
 
 
@@ -70,46 +77,71 @@ def send_relation_dict(val):
 # FUNCTION: ANALYSE IF THE RELATION IS REFLEXIVE
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n*m)
 def reflexive_relations(relation_dict):
+
+    status = False
+    check = 0
+
     for a, related_a in relation_dict.items():
         for b in related_a:
-            if a == b:
-                return True, "R = {(" + str(a) + "," + str(b) + ")}"
+            for i in nodes:
+                if a == i or b == i:
+                    check += 1
+                    status = True
+            if a != b and check != len(nodes):
+                status = False
 
-    return False, "R = {}"
+    return status
 
 
 # FUNCTION: ANALYSE IF THE RELATION IS SYMMETRIC
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n*m)
 def symmetric_relations(relation_dict):
+    status = False
+    check = False
+
     for a, related_a in relation_dict.items():
         for b in related_a:
-            if b in relation_dict and a in relation_dict[b] and a != b:
-                return True, "S = {(" + str(a) + "," + str(b) + "),(" + str(b) + "," + str(a) + ")}"
+            if a == b and check is False:
+                status = False
+            elif b not in relation_dict or a not in relation_dict[b]:
+                status = False
+                return status
+            else:
+                status = True
+                check = True
 
-    return False, "S = {}"
+    return status
 
 
 # FUNCTION: ANALYSE IF THE RELATION IS SYMMETRIC
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n*m²)
 def transitive_relations(relation_dict):
+    status = False
+    check = False
+
     for a, related_a in relation_dict.items():
         for b in related_a:
             if b in relation_dict:
                 for c in relation_dict[b]:
-                    if c in relation_dict[a] and a != c != b != a:
-                        return True, "T = {(" + str(a) + "," + str(b) + "),(" + str(b) + "," + str(c) + "),(" + str(
-                            a) + "," + str(c) + ")}"
+                    if c in relation_dict[a]:
+                        status = True
+                        check = True
+                    elif a == b and check is False:
+                        status = False
+                    else:
+                        status = False
+                        return status
 
-    return False, "T = {}"
+    return status
 
 
 # FUNCTION: ANALYSE THE SEQUENCE
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n*m²)
 def analyze(value):
     relation_dict = send_relation_dict(value)
-    reflexive, ref_val = reflexive_relations(relation_dict)
-    symmetric, sym_val = symmetric_relations(relation_dict)
-    transitive, tran_val = transitive_relations(relation_dict)
+    reflexive = reflexive_relations(relation_dict)
+    symmetric = symmetric_relations(relation_dict)
+    transitive = transitive_relations(relation_dict)
 
     # CASE: EQUIVALENCE
     if reflexive and symmetric and transitive:
@@ -117,21 +149,19 @@ def analyze(value):
     else:
         equivalence = False
 
-    return reflexive, symmetric, transitive, ref_val, sym_val, tran_val, equivalence
+    return reflexive, symmetric, transitive, equivalence
 
 
 # FUNCTION: CREATES A GRAPH WITH THE PREVIOUS RELATIONS
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n²)
 def plot(val):
     g = graphviz.Digraph(filename='graph.log')
-    nodes = []
     colors = ['#FFA07A', '#F0E68C', '#D8BFD8', '#98FB98', '#FAF0E6', '#AFEEEE', '#FFA500', '#FF69B4', '#DC143C',
               '#A9A9A9']
     for i in range(len(val)):
-        if val[i] not in nodes:
-            nodes.append(val[i])
+        for j in nodes:
             g.attr(rankdir='LR')
-            g.node(str(val[i]), style='filled', fillcolor=random.choice(colors), shape='circle')
+            g.node(str(j), style='filled', fillcolor=random.choice(colors), shape='circle')
         if i % 2 == 0:
             g.edge(str(val[i]), str(val[i + 1]))
 
@@ -146,17 +176,19 @@ def plot(val):
 # FUNCTION: MAIN
 # COMPLEXITY: BEST CASE - O(n) | WORST CASE - O(n*m²)
 def main():
+    global nodes
+
     print("Running Program!")
     val = input("Enter your set: ")
     val = transformation(val)
 
     print_conj(val)
 
-    reflexive, symmetric, transitive, ref_val, sym_val, tran_val, equivalence = analyze(val)
+    reflexive, symmetric, transitive, equivalence = analyze(val)
     print(f"\n \
-    1. Reflexive: {reflexive} | {ref_val}\n \
-    2. Symmetric: {symmetric} | {sym_val}\n \
-    3. Transitive: {transitive} | {tran_val}\n \
+    1. Reflexive: {reflexive} \n \
+    2. Symmetric: {symmetric} \n \
+    3. Transitive: {transitive} \n \
     4. Equivalence: {equivalence}")
     plot(val)
 
