@@ -1,5 +1,11 @@
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
+def reverseStringinList(list):
+	newList = []
+	for i in range(0,len(list)):
+		newList.append(list[i][::-1])
+	return newList
+
 def analyze(val, alphabet):
     """
     Here goes your code to do the analysis
@@ -18,11 +24,18 @@ def analyze(val, alphabet):
     
     for i in range(0,len(val)-1):
 	    if val[i][0] == val[i][1]:
-	        reflexiveCheckboxes[int(val[i][0])] = True
+			Reflexive = True
+	        #reflexiveCheckboxes[int(val[i][0])] = True
+	        
+    reverseList = reverseStringinList(val)
+    
+    print(reverseList)
+	
 		
 
     return Reflexive,Symmetric,Transitive
     
+
 def formatInput(stringInput):
 	n = 2
 	initStr = ''.join(char for char in stringInput if char.isdigit())
