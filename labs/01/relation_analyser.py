@@ -1,18 +1,41 @@
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
-def transitiveCheck(lista):
+"""def transitiveCheck(lista):
     for i in range(0,len(lista)-1):
+		#Select an (A,B) avoid Reflexive ones
         if lista[i][0] != lista[i][1]:
             inReferenceA = lista[i]
             print("A",inReferenceA)
-            """for j in range(0,len(lista)-1):
+            for j in range(0,len(lista)-1):
+				#First checks if theres a B relation (A,B) -> (B,C), second if its not relfexive (A,A) or (B,B), third if it is not (A,B)(A,B)
                 if inReferenceA[1] == lista[j][0] and lista[j][0] != lista[j][1] and lista[j] != inReferenceA:
                     inReferenceB = lista[j]
                     print("B",inReferenceB)
                     for k in range(0,len(lista)-1):
+						#First checks if (B,C) -> (C,?), second checks if (A,B) -> (?,A), third if its not Reflexive
                         if lista[k][0] == inReferenceB[1] and lista[k][1] == inReferenceA[0] and lista[k][0] != lista[k][1] and lista[k] != inReferenceB and lista[k] != inReferenceA:
                             inReferenceC = lista[k]
                             print("C", inReferenceC , "\n")"""
+                            
+def transitiveCheck(lista):
+    for i in range(len(lista)-1):
+        # Select an (A, B) relation, avoiding Reflexive ones
+        if lista[i][0] != lista[i][1]:
+            inReferenceA = lista[i]
+            print("A", inReferenceA)
+            
+            for j in range(len(lista)-1):
+                # Check for a (B, C) relation
+                if inReferenceA[1] == lista[j][0] and lista[j][0] != lista[j][1] and lista[j] != inReferenceA:
+                    inReferenceB = lista[j]
+                    print("B", inReferenceB)
+                    
+                    for k in range(len(lista)-1):
+                        # Check for a (C, ?) relation
+                        if lista[k][0] == inReferenceA[0] and lista[k][1] == inReferenceB[1] and lista[k][0] != lista[k][1] and lista[k] != inReferenceB and lista[k] != inReferenceA:
+                            inReferenceC = lista[k]
+                            print("C", inReferenceC, "\n")
+        return False
 
 def similaritiesInLists(a,b):
     return [i for i, j in zip(a, b) if i == j]
@@ -50,7 +73,7 @@ def analyze(val, alphabet):
     if len(similaritiesInLists(val,reverseList)) != 0:
         Symmetric = True
     
-    transitiveCheck(val)
+    Transitive = transitiveCheck(val)
 		
 
     return Reflexive,Symmetric,Transitive
