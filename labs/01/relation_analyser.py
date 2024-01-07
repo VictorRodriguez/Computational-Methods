@@ -23,8 +23,8 @@ def analyze(val, alphabet):
     Transitive = False
     
     for i in range(0,len(val)-1):
-	    if val[i][0] == val[i][1]:
-			Reflexive = True
+        if val[i][0] == val[i][1]:
+            Reflexive = True
 	        #reflexiveCheckboxes[int(val[i][0])] = True
 	        
     reverseList = reverseStringinList(val)
