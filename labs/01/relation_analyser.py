@@ -1,5 +1,19 @@
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
+def transitiveCheck(lista):
+    for i in range(0,len(lista)-1):
+        if lista[i][0] != lista[i][1]:
+            inReferenceA = lista[i]
+            print("A",inReferenceA)
+            """for j in range(0,len(lista)-1):
+                if inReferenceA[1] == lista[j][0] and lista[j][0] != lista[j][1] and lista[j] != inReferenceA:
+                    inReferenceB = lista[j]
+                    print("B",inReferenceB)
+                    for k in range(0,len(lista)-1):
+                        if lista[k][0] == inReferenceB[1] and lista[k][1] == inReferenceA[0] and lista[k][0] != lista[k][1] and lista[k] != inReferenceB and lista[k] != inReferenceA:
+                            inReferenceC = lista[k]
+                            print("C", inReferenceC , "\n")"""
+
 def similaritiesInLists(a,b):
     return [i for i, j in zip(a, b) if i == j]
 
@@ -32,11 +46,11 @@ def analyze(val, alphabet):
 	        
     reverseList = reverseStringinList(val)
     
-    print(reverseList)
     
     if len(similaritiesInLists(val,reverseList)) != 0:
         Symmetric = True
-	
+    
+    transitiveCheck(val)
 		
 
     return Reflexive,Symmetric,Transitive
