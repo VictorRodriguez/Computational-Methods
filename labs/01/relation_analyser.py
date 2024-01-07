@@ -1,5 +1,8 @@
 import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
+def similaritiesInLists(a,b):
+    return [i for i, j in zip(a, b) if i == j]
+
 def reverseStringinList(list):
 	newList = []
 	for i in range(0,len(list)):
@@ -30,6 +33,9 @@ def analyze(val, alphabet):
     reverseList = reverseStringinList(val)
     
     print(reverseList)
+    
+    if len(similaritiesInLists(val,reverseList)) != 0:
+        Symmetric = True
 	
 		
 
