@@ -27,8 +27,10 @@ def buscando_simetria(relacion):
 def buscando_transicion(relacion):
     for primerPar in relacion:
         for segundoPar in relacion:
-            if primerPar[1]==segundoPar[0] and (primerPar[0], segundoPar[1]) not in relacion:
-                return "no transitiva"
+            if primerPar[1]==segundoPar[0]:
+                 parCompuesto=(primerPar[0], segundoPar[1])
+                 if parCompuesto not in relacion:
+                    return "no transitiva"
     return "transitiva"
 
 def analyze(val):
@@ -43,11 +45,9 @@ def analyze(val):
     Transitive = buscando_transicion(val)
 
     return Reflexive, Symmetric, Transitive
-
+"""
 def plot(val):
-    """
-    Here goes your code to generate graph.log and plot the graph
-    """
+    #Here goes your code to generate graph.log and plot the graph
 
     # Create the graph
     dot= graphviz.Digraph('G', comment='graph.log')
@@ -56,48 +56,68 @@ def plot(val):
 
     print(dot.source)
     # Render the graph
-    dot.view()
+    #dot.view()
     #decidi imprimir el log de la relacion porque me di cuenta que en codespace al generar el pdf 
     #para la accion de abrir en otra pestaña el archivo
 
+"""
+def plot(val, output_file='graph.gv'):
+    """
+    Generate graph.log and save the DOT source code to a .gv file
 
-def get_set(val):
+    Decidi imprimir el log de la grafica y guardarlo en un .gv porque al usar el comando view 
+    me aparecia un error al generar el pdf
+    """
+
+    #Create the graph
+    dot=graphviz.Digraph('G',comment='graph.log')
+    for i in val:
+        dot.edge(str(i[0]),str(i[1]))
+
+    #Save the graph into graph.gv 
+    with open(output_file,'w') as file:
+        file.write(dot.source)
+
+    print(f'Graph was saved into file {output_file}')
+
+def checking_theSet(val):
     """
     How to put the input
     Example:
     {(0,0),(0,1),(0,3),(1,0),(1,1),(2,2),(3,0),(3,3)}
     { (0,0), (1,1), (1,0) }
     """
-    result = None
+    checkedSet=None
 
     try:
-        # Use literal_eval to convert the string into a set
-        result = ast.literal_eval(val)
+        #Using literal_eval to convert the input string to a set
+        checkedSet=ast.literal_eval(val)
 
         # Check if result is a set
-        if not isinstance(result, set):
-            raise ValueError("Input string does not represent a set")
+        if not isinstance(checkedSet,set):
+            raise ValueError("Input is not a set")
 
     except ValueError as e:
-        print(f"Error: Invalid input. {e}")
+        print(f"Invalid input. {e}")
         raise e
     except Exception as e:
-        print("Error: Something went wrong.")
+        print("Something went wrong.")
         raise e
 
-    return result
+    return checkedSet
 
 def main():
     print("Hello World analyzing input!")
     val = input("Enter your set: ")
-    val=get_set(val)
+    val=checking_theSet(val)
     print(val)
     Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
     3. Transitive: {Transitive}")
-    plot(val)
+    #plot(val)
+    plot(val, 'graph.gv')
 
 if __name__ == "__main__":
     main()
