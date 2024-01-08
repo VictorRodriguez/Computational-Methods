@@ -58,7 +58,7 @@ def plot(val):
     # Render the graph
     #dot.view()
     #decidi imprimir el log de la relacion porque me di cuenta que en codespace al generar el pdf 
-    #para la accion de abrir en otra pestaña el archivo
+    #para la accion de abrir en otra pestaña el archivo la pagina dejaba de funcionar
 
 """
 def plot(val, output_file='graph.gv'):
