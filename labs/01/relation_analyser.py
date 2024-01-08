@@ -1,36 +1,75 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+# Emily Rosenfeld, A01198339
+# ACT 01
 
 def analyze(val):
-    """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
-    """
+
+    # Asi convertimos val en una tupla
+    val = eval(val)
+
+    # Poner las condiciones iniciales en False
     Reflexive = False
     Symmetric = False
     Transitive = False
+    m = 0
 
-    return Reflexive,Symmetric,Transitive
+    # Aqui se revisara la Refelexividad del conjunto de tuplas
+    for a,b in val:
+        if (a, a) not in val:
+            m += 1
+            break
+        elif (b, b) not in val:
+            m += 1
+            break
+    if m == 0:
+        Reflexive = True
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+    # Aqui se revisara la Simetria del conjunto de tuplas
+    Symmetric = False
+    for a,b in val :
+        if (a, b) and (b, a) not in val:
+            Symmetric = False
+            break
+        else:
+            Symmetric = True
+
+    # Aqui se revisara la Transitividad del conjunto de tuplas
+    Transitive = False
+    for a, b1 in val:
+        for b2, c in val:
+            if (b1 == b2) and (b1 != a) and (b1 != c) and (a != c) and (c, a) not in val:
+                Transitive = False
+                break
+            else:
+                Transitive = True
+
+    return Reflexive, Symmetric, Transitive
 
 def main():
     print("Hello World analyzing input!")
     val = input("Enter your set: ")
     print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
+
+    Reflexive, Symmetric, Transitive = analyze(val)
+
+    if ((Reflexive == True) and (Symmetric == True) and (Transitive == True)):
+        Equivalence = True
+    else:
+        Equivalence = False
+
+
     print(f"\
     1. Reflexive: {Reflexive} \
     2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+    3. Transitive: {Transitive} \
+    4. Equivalence: {Equivalence}  ")
+
+    # Imprimir el grafo 
+    print("\n\n digraph example { \n rankdir=LR; \n node [shape = circle];\n")
+    val = eval(val)
+    for a,b in val:
+        print(f"  {a} -> {b} ;")
+    print("\n\n}")
+
 
 if __name__ == "__main__":
     main()
