@@ -57,6 +57,8 @@ def plot(val):
     print(dot.source)
     # Render the graph
     dot.view()
+    #decidi imprimir el log de la relacion porque me di cuenta que en codespace al generar el pdf 
+    #para la accion de abrir en otra pestaña el archivo
 
 
 def get_set(val):
