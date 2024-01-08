@@ -10,8 +10,8 @@ def buscando_reflexion(relacion):
 
     for elemento in elementos:
         if (elemento,elemento) not in relacion:
-            return "no reflexiva"
-    return "reflexiva"
+            return False
+    return True
 
 #-----------------------------SIMETRICA--------------------------------------
 
@@ -19,19 +19,19 @@ def buscando_simetria(relacion):
     for par in relacion:
         parReverso=(par[1],par[0])
         if parReverso not in relacion:
-            return "no simetrica"
-    return "simetrica"
+            return False
+    return True
     
 #-----------------------------TRANSITIVA--------------------------------------
 
 def buscando_transicion(relacion):
-    for primerPar in relacion:
-        for segundoPar in relacion:
-            if primerPar[1]==segundoPar[0]:
-                 parCompuesto=(primerPar[0], segundoPar[1])
-                 if parCompuesto not in relacion:
-                    return "no transitiva"
-    return "transitiva"
+    for par1 in relacion:
+        for par2 in relacion:
+            if par1[1] == par2[0]:
+                composed_pair = (par1[0], par2[1])
+                if composed_pair not in relacion:
+                    return False
+    return True
 
 def analyze(val):
     """
@@ -78,6 +78,7 @@ def plot(val, output_file='graph.gv'):
     with open(output_file,'w') as file:
         file.write(dot.source)
 
+    print(dot.source)
     print(f'Graph was saved into file {output_file}')
 
 def checking_theSet(val):
