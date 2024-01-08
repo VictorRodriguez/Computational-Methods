@@ -1,36 +1,49 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+# Sergio Alfonso Casillas Santoyo A01424863
 
-def analyze(val):
-    """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
-    """
-    Reflexive = False
-    Symmetric = False
-    Transitive = False
+def generar_script_graphviz(pares):
+    script = "digraph ejemplo {\n\n\trankdir=LR;\n\tnode [shape = circle];\n"
+    for x, y in pares:
+        script += f"\t{x} -> {y} ;\n"
+    script += "\n}"
+    return script
 
-    return Reflexive,Symmetric,Transitive
+def es_reflexivo(pares, elementos):
+    return all((e, e) in pares for e in elementos)
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+def es_simetrico(pares):
+    return all((y, x) in pares for x, y in pares)
 
-def main():
-    print("Hello World analyzing input!")
-    val = input("Enter your set: ")
-    print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
-    print(f"\
-    1. Reflexive: {Reflexive} \
-    2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+def es_transitivo(pares):
+    for x, y in pares:
+        for _, z in pares:
+            if (y, z) in pares and (x, z) not in pares:
+                return False
+    return True
 
-if __name__ == "__main__":
-    main()
+
+pares = {(0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3)}
+
+
+elementos = set(x for x, _ in pares).union(y for _, y in pares)
+
+
+reflexivo = es_reflexivo(pares, elementos)
+simetrico = es_simetrico(pares)
+transitivo = es_transitivo(pares)
+equivalencia = reflexivo and simetrico and transitivo
+
+
+print(f"(a) R es reflexiva: {'Sí' if reflexivo else 'No'}")
+print(f"(b) R es simétrica: {'Sí' if simetrico else 'No'}")
+print(f"(c) R no es transitiva: {'No' if transitivo else 'Sí'}")
+print(f"(d) R no tiene relación de equivalencia: {'No' if equivalencia else 'Sí'}")
+
+
+script_graphviz = generar_script_graphviz(pares)
+
+
+ruta_archivo_graph_log = r'C:\Users\dripl\OneDrive\Escritorio\Programacion universidad invierno\graph.log'
+
+
+with open(ruta_archivo_graph_log, 'w') as archivo:
+    archivo.write(script_graphviz)
