@@ -1,7 +1,7 @@
 """
  @Miguel Angel Cabrera Victoria <A01782982@tec.mx>
  Input : {(0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3)}
-        {(0,0), (0,1), (0,3), (1,0), (1,1), (2,2), (3,0), (3,3), (4,1), (4,4), (5,5)}
+        {(1,1), (2,1), (1,2), (2,2), (2,3), (3,2)}
 """
 import graphviz 
 
@@ -25,23 +25,22 @@ def simetric(pair_lists):
             c,d = pair_lists[element_2]
             #print("a ", a, " b ", b)
             #print("c ", c, " d ", d)
-            if b == c :
+            if (b == c) and (a == d) :
                 result.append([b,c])
     
-    if result:
-        return True
-    else:
-        return False
+    return bool(result)
             
-
-
 def transitive(pair_lists):
-    for (a, b) in pair_lists:
-        for (c, d) in pair_lists:
-            if b == c:
-                if (a,d) not in pair_lists:
-                    return False
+    for element_1 in range(len(pair_lists)):
+        for element_2 in range(len(pair_lists)):
+            a, b = pair_lists[element_1]
+            c, d = pair_lists[element_2]
+            #print("a ", a, " b ", b)
+            #print("c ", c, " d ", d)
+            if (b == c) and ([a, d] not in pair_lists):
+                return False
     return True
+
 
 #------------------------------------------------------------
 
@@ -54,17 +53,8 @@ def plot(pair_lists):
     for pair in pair_lists:
         # print(pair[0], " ", pair[1])
         g.edge(str(pair[0]), str(pair[1]))
-    #g.view()
+    g.view()
 
-
-    
-    Reflexive = reflexive(pair_lists)
-    #print(Reflexive)
-    # print(f"\
-    # 1. Reflexive: {Reflexive} \
-    # 2. Symmetric:  \
-    # 3. Transitive:")
-    plot(pair_lists)
 
 def main():
     print("Miguel Angel Cabrera Victoria - A01782982")
@@ -82,12 +72,11 @@ def main():
     Simetric = simetric(pair_lists)
     #simetric(pair_lists)
     #print(Simetric)
-
     Transitive = transitive(pair_lists)
     #print(Transitive)
 
-
-    print(f"\nReflexive: {Reflexive}\nSimetric : {Simetric}")
+    print(f"\nReflexive: {Reflexive}\nSimetric : {Simetric}\nTransitive :  {Transitive}")
+    plot(pair_lists)
     
     
 
