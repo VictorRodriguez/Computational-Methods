@@ -12,14 +12,36 @@ def reflexive(pair_lists):
         if element[0] == element[1]:
             max = element[0]
             result.append([element[0],element[1]])
-        
     #print("Result ", len(result))
     if len(result) == max + 1:
         return True
     return False
 
+def simetric(pair_lists):
+    result = []
+    for element_1 in range(len(pair_lists)):
+        for element_2 in range(element_1 + 1,len(pair_lists)):
+            a,b = pair_lists[element_1]
+            c,d = pair_lists[element_2]
+            #print("a ", a, " b ", b)
+            #print("c ", c, " d ", d)
+            if b == c :
+                result.append([b,c])
+    
+    if result:
+        return True
+    else:
+        return False
+            
+
+
 def transitive(pair_lists):
-    pass
+    for (a, b) in pair_lists:
+        for (c, d) in pair_lists:
+            if b == c:
+                if (a,d) not in pair_lists:
+                    return False
+    return True
 
 #------------------------------------------------------------
 
@@ -51,13 +73,21 @@ def main():
     pairs = [pair.replace("{", "").replace("}", "").replace("(", "").replace(")", "").strip(',') for pair in val.split(" ")]
     #print(pairs)
     pair_lists = [[int(element) for element in pair.split(',')] for pair in pairs]
-    #print(pair_lists)
+    #print("Pair List ", pair_lists)
 
     # Output 
     
     Reflexive = reflexive(pair_lists)
+    #print(Reflexive)
+    Simetric = simetric(pair_lists)
+    #simetric(pair_lists)
+    #print(Simetric)
 
-    print(f"\nReflexive: {Reflexive}\n")
+    Transitive = transitive(pair_lists)
+    #print(Transitive)
+
+
+    print(f"\nReflexive: {Reflexive}\nSimetric : {Simetric}")
     
     
 
