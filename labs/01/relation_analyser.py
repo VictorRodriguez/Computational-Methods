@@ -1,36 +1,42 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+import networkx as nx
+import matplotlib.pyplot as plt
+import itertools
 
 def analyze(val):
     """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
+    Aquí va tu código para realizar el análisis.
+    1. Reflexiva: aRa para todo a en X,
+    2. Simétrica: aRb implica bRa para todo a, b en X
+    3. Transitiva: aRb y bRc implica aRc para todo a, b, c en X
     """
-    Reflexive = False
-    Symmetric = False
-    Transitive = False
+    Reflexiva = all((a, a) in val for a, _ in val)
+    Simetrica = all((b, a) in val for a, b in val)
+    Transitiva = all((a, c) in val for a, b in val for _, c in val if b == _)
 
-    return Reflexive,Symmetric,Transitive
+    return Reflexiva, Simetrica, Transitiva, val
 
-def plot():
+def plot(relation):
     """
-    Here goes your code to do the plot of the set
+    Aquí va tu código para realizar la representación gráfica del conjunto.
     """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+    g = nx.DiGraph()
+    g.add_edges_from(relation)
+    nx.draw(g, with_labels=True, font_weight='bold')
+    plt.show()
 
 def main():
-    print("Hello World analyzing input!")
-    val = input("Enter your set: ")
+    print("Hola mundo analizando entrada!")
+    val = eval(input("Ingresa tu conjunto en el formato [(a, b), (c, d), ...]: "))
     print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
+    Reflexiva, Simetrica, Transitiva, relation = analyze(val)
     print(f"\
-    1. Reflexive: {Reflexive} \
-    2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+    1. Reflexiva: {Reflexiva} \
+    2. Simétrica: {Simetrica} \
+    3. Transitiva: {Transitiva}")
+    if not (Reflexiva and Simetrica and Transitiva):
+        print("La relación no es simétrica y reflexiva, por lo que no tiene una relación de equivalencia.")
+    else:
+        plot(relation)
 
 if __name__ == "__main__":
     main()
