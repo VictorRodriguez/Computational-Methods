@@ -1,42 +1,36 @@
-import networkx as nx
-import matplotlib.pyplot as plt
-import itertools
+import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
 
 def analyze(val):
     """
-    Aquí va tu código para realizar el análisis.
-    1. Reflexiva: aRa para todo a en X,
-    2. Simétrica: aRb implica bRa para todo a, b en X
-    3. Transitiva: aRb y bRc implica aRc para todo a, b, c en X
+    Here goes your code to do the analysis
+    1. Reflexive: aRa for all a in X,
+    2. Symmetric: aRb implies bRa for all a,b in X
+    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
     """
-    Reflexiva = all((a, a) in val for a, _ in val)
-    Simetrica = all((b, a) in val for a, b in val)
-    Transitiva = all((a, c) in val for a, b in val for _, c in val if b == _)
+    Reflexive = False
+    Symmetric = False
+    Transitive = False
 
-    return Reflexiva, Simetrica, Transitiva, val
+    return Reflexive,Symmetric,Transitive
 
-def plot(relation):
+def plot():
     """
-    Aquí va tu código para realizar la representación gráfica del conjunto.
+    Here goes your code to do the plot of the set
     """
-    g = nx.DiGraph()
-    g.add_edges_from(relation)
-    nx.draw(g, with_labels=True, font_weight='bold')
-    plt.show()
+    g = graphviz.Digraph('G', filename='hello.gv')
+    g.edge('Hello', 'World')
+    g.view()
 
 def main():
-    print("Hola mundo analizando entrada!")
-    val = eval(input("Ingresa tu conjunto en el formato [(a, b), (c, d), ...]: "))
+    print("Hello World analyzing input!")
+    val = input("Enter your set: ")
     print(val)
-    Reflexiva, Simetrica, Transitiva, relation = analyze(val)
+    Reflexive,Symmetric,Transitive = analyze(val)
     print(f"\
-    1. Reflexiva: {Reflexiva} \
-    2. Simétrica: {Simetrica} \
-    3. Transitiva: {Transitiva}")
-    if not (Reflexiva and Simetrica and Transitiva):
-        print("La relación no es simétrica y reflexiva, por lo que no tiene una relación de equivalencia.")
-    else:
-        plot(relation)
+    1. Reflexive: {Reflexive} \
+    2. Symmetric: {Symmetric} \
+    3. Transitive: {Transitive}")
+    plot()
 
 if __name__ == "__main__":
     main()
