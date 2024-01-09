@@ -1,29 +1,10 @@
 #Tuve problemas instalando graphviz por lo que decidi generar un archivo de texto para que lo pueda copiar y pegar en Graphviz online
 
 def analyze(val):
-    Reflexivo = False
-    Simetrico = False
-    Transitivo = False
 
-    for pair in val:
-        a, b = pair
-
-        # condicional para ver si es reflexivo
-        if a == b or (a, a) in val:
-            Reflexivo = True
-
-        # condicional para ver si es simétrico
-        if (b, a) in val:
-            Simetrico = True
-
-    # condicional para ver si es transitivo
-    for pair_1 in val:
-        a, b = pair_1
-        for pair_2 in val:
-            c, d = pair_2
-            if b == c and (a, d) not in val:
-                Transitivo = False
-                break
+    Reflexivo = all((a, a) in val for a, _ in val)
+    Simetrico = all((b, a) in val for a, b in val)
+    Transitivo = all((a, c) in val for a, b1 in val for b2, c in val if b1 == b2)
 
     return Reflexivo, Simetrico, Transitivo
 
