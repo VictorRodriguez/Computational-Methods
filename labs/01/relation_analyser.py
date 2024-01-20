@@ -1,36 +1,48 @@
-import graphviz # https://graphviz.readthedocs.io/en/stable/index.html
+#Tuve problemas instalando graphviz por lo que decidi generar un archivo de texto para que lo pueda copiar y pegar en Graphviz online
 
 def analyze(val):
-    """
-    Here goes your code to do the analysis
-    1. Reflexive: aRa for all a in X,
-    2. Symmetric: aRb implies bRa for all a,b in X
-    3. Transitive: aRb and bRc imply aRc for all a,b,c in X,
-    """
-    Reflexive = False
-    Symmetric = False
-    Transitive = False
 
-    return Reflexive,Symmetric,Transitive
+    Reflexivo = all((a, a) in val for a, _ in val)
+    Simetrico = all((b, a) in val for a, b in val)
+    Transitivo = all((a, c) in val for a, b1 in val for b2, c in val if b1 == b2)
 
-def plot():
-    """
-    Here goes your code to do the plot of the set
-    """
-    g = graphviz.Digraph('G', filename='hello.gv')
-    g.edge('Hello', 'World')
-    g.view()
+    return Reflexivo, Simetrico, Transitivo
+
+def text_graph(val):
+    with open('graph.txt', 'w') as file:
+        file.write('Digraph {\n')
+
+        for pair in val:
+            file.write(f'\t{pair[0]} -> {pair[1]} ;\n')
+
+        file.write('}\n')
 
 def main():
-    print("Hello World analyzing input!")
-    val = input("Enter your set: ")
-    print(val)
-    Reflexive,Symmetric,Transitive = analyze(val)
-    print(f"\
-    1. Reflexive: {Reflexive} \
-    2. Symmetric: {Symmetric} \
-    3. Transitive: {Transitive}")
-    plot()
+    print("Set:")
+    val_str = input("Ingresa tu set en el formato { (a,b), (c,d), (e,f) ... }: ")
+    val = eval(val_str)  # Convierte string a una tupla
+
+    Reflexivo, Simetrico, Transitivo = analyze(val)
+
+    if Reflexivo:
+        print("R es reflexivo.")
+    else:
+        print("R no es reflexivo.")
+
+    if Simetrico:
+        print("R es simetrico.")
+    else:
+        print("R no es simetrico.")
+
+    if Transitivo:
+        print("R es transitivo.")
+    else:
+        print("R no es transitivo.")
+
+    if Reflexivo and Simetrico and Transitivo:
+        print("R tiene una relación equivalente")
+
+    text_graph(val)
 
 if __name__ == "__main__":
     main()
