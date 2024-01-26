@@ -30,6 +30,8 @@ CMPLX_NOUN : ARTICLE NOUN
             ;
 CMPLX_VERB : VERB
             | VERB NOUN_PHRASE
+            | VERB PREPOSITION_PHRASE
+            | VERB NOUN_PHRASE PREPOSITION_PHRASE
             ;
 %%
 
