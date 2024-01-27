@@ -1,5 +1,5 @@
 all:
-	yacc -d grammar.y
+	yacc -d -v grammar.y
 	lex grammar.l
 	gcc y.tab.c lex.yy.c -ly -lfl -o grammar
 

@@ -7,8 +7,6 @@ extern int yylval;
 "a"|"the"			{ yylval = yytext[0]; return ARTICLE;}
 "touches"|"likes"|"sees"	{ yylval = yytext[0]; return VERB;}
 "with"				{ yylval = yytext[0]; return PREP;}
-[\t];				/* ignore whitespace*/
-\n return 0;			/*Logical EOF*/
 . return yytext[0];
 %%
 
