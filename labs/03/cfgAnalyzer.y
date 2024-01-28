@@ -6,33 +6,34 @@ extern int yylex();
 extern char* yytext;
 extern FILE* yyin;
 
-void yyerror(const char* s) {
+void yyerror(const char *s) {
     fprintf(stderr, "ERROR: %s\n", s);
+    exit(0);
 }
 
 %}
 
-%token ARTICLE NOUN VERB PREPOSITION SALTO
+%token ARTICLE NOUN VERB PREPOSITION 
 %start SENTENCE
 
 %%
-SENTENCE : NOUN_PHRASE VERB_PHRASE SALTO
+SENTENCE : NOUN_PHRASE VERB_PHRASE
         ;
 NOUN_PHRASE : CMPLX_NOUN
             | CMPLX_NOUN PREPOSITION_PHRASE
             ;
-VERB_PHRASE : IN_VERB
-            | T_VERB NOUN_PHRASE
-            | VERB_PHRASE PREPOSITION_PHRASE
+VERB_PHRASE : CMPLX_VERB
+            | CMPLX_VERB PREPOSITION_PHRASE
             ;
 PREPOSITION_PHRASE : PREPOSITION CMPLX_NOUN
             ;
 CMPLX_NOUN : ARTICLE NOUN
+            | ARTICLE PREPOSITION_PHRASE
             ;
-IN_VERB : VERB ARTICLE NOUN
+CMPLX_VERB : VERB 
+            | VERB NOUN_PHRASE
         ;
-T_VERB : VERB ARTICLE
-        ;
+
 %%
 
 int main(int argc, char **argv) {
@@ -52,10 +53,10 @@ int main(int argc, char **argv) {
         switch(parseResult) {
             case 1:
                 printf("PASS\n");
-                break;
+            break;
             default:
                 printf("FAIL\n");
-                break;
+            break;
         }
     }
 

@@ -13,7 +13,7 @@
 "likes"     { return VERB; }
 "with"      { return PREPOSITION; }
 "sees"      { return VERB; }
-\n          { return SALTO; }
 .           { /* ignore other characters */ }
+""         {   /* ignore spaces */}
 
 %%

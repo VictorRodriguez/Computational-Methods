@@ -362,8 +362,8 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[43] =
     {   0,
-        0,    0,   13,   11,   10,    1,   11,   11,   11,   11,
-       11,   11,   11,    0,    0,    0,    0,    0,    0,    0,
+       11,   11,   13,   10,   12,    1,   10,   10,   10,   10,
+       10,   10,   10,    0,    0,    0,    0,    0,    0,    0,
         0,    3,    0,    0,    0,    0,    2,    0,    0,    0,
         4,    0,    9,    0,    8,    0,    7,    0,    5,    0,
         6,    0
@@ -788,22 +788,21 @@ YY_RULE_SETUP
 { return VERB; }
 	YY_BREAK
 case 10:
-/* rule 10 can match eol */
 YY_RULE_SETUP
 #line 16 "cfgAnalyzer.l"
-{ return SALTO; }
+{ /* ignore other characters */ }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 17 "cfgAnalyzer.l"
-{ /* ignore other characters */ }
+{   /* ignore spaces */}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 19 "cfgAnalyzer.l"
 ECHO;
 	YY_BREAK
-#line 807 "lex.yy.c"
+#line 806 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
