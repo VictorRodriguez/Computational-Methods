@@ -460,10 +460,14 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "grammar.l"
 #line 2 "grammar.l"
-#include "y.tab.h"
-extern int yylval;
-#line 465 "lex.yy.c"
-#line 466 "lex.yy.c"
+#include <stdio.h>
+
+#define NOUN 1
+#define ARTICLE 2
+#define VERB 3
+#define PREP 4
+#line 469 "lex.yy.c"
+#line 470 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -680,9 +684,10 @@ YY_DECL
 		}
 
 	{
-#line 5 "grammar.l"
+#line 10 "grammar.l"
 
-#line 685 "lex.yy.c"
+
+#line 690 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -741,35 +746,35 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 6 "grammar.l"
-{ yylval = yytext[0]; return NOUN;}
+#line 12 "grammar.l"
+{ printf("NOUN"); /*return NOUN;*/ }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 7 "grammar.l"
-{ yylval = yytext[0]; return ARTICLE;}
+#line 13 "grammar.l"
+{ printf("ARTICLE"); /*return ARTICLE;*/ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 8 "grammar.l"
-{ yylval = yytext[0]; return VERB;}
+#line 14 "grammar.l"
+{ printf("VERB"); /*return VERB;*/ }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 9 "grammar.l"
-{ yylval = yytext[0]; return PREP;}
+#line 15 "grammar.l"
+{ printf("PREP"); /*return PREP;*/ }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 10 "grammar.l"
-return yytext[0];
+#line 17 "grammar.l"
+{ /* Ignore any other characters */ }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 11 "grammar.l"
+#line 19 "grammar.l"
 ECHO;
 	YY_BREAK
-#line 772 "lex.yy.c"
+#line 777 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1774,7 +1779,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 11 "grammar.l"
+#line 19 "grammar.l"
 
 
 int main(int argc, char* argv[]) {
