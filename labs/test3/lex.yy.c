@@ -322,9 +322,6 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
-
-#define yywrap() (/*CONSTCOND*/1)
-#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -464,11 +461,11 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "grammar.l"
-#line 2 "grammar.l"
-#include "y.tab.h"
-#line 470 "lex.yy.c"
-#line 471 "lex.yy.c"
+#line 1 "grammar_lex.l"
+#line 2 "grammar_lex.l"
+#include "grammar_yacc.tab.h"
+#line 467 "lex.yy.c"
+#line 468 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -685,10 +682,10 @@ YY_DECL
 		}
 
 	{
-#line 7 "grammar.l"
+#line 5 "grammar_lex.l"
 
 
-#line 691 "lex.yy.c"
+#line 688 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -747,66 +744,66 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 9 "grammar.l"
-{ printf("Token: ARTICLE 'a'\n"); return ARTICLE; }
+#line 7 "grammar_lex.l"
+{  return ARTICLE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 10 "grammar.l"
-{ printf("Token: ARTICLE 'the'\n"); return ARTICLE; }
+#line 8 "grammar_lex.l"
+{  return ARTICLE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 11 "grammar.l"
-{ printf("Token: NOUN 'boy'\n"); return NOUN; }
+#line 9 "grammar_lex.l"
+{  return NOUN; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 12 "grammar.l"
-{ printf("Token: NOUN 'girl'\n"); return NOUN; }
+#line 10 "grammar_lex.l"
+{  return NOUN; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 13 "grammar.l"
-{ printf("Token: NOUN 'flower'\n"); return NOUN; }
+#line 11 "grammar_lex.l"
+{  return NOUN; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 14 "grammar.l"
-{ printf("Token: VERB 'touches'\n"); return VERB; }
+#line 12 "grammar_lex.l"
+{  return VERB; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 15 "grammar.l"
-{ printf("Token: VERB 'likes'\n"); return VERB; }
+#line 13 "grammar_lex.l"
+{  return VERB; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 16 "grammar.l"
-{ printf("Token: VERB 'sees'\n"); return VERB; }
+#line 14 "grammar_lex.l"
+{  return VERB; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 17 "grammar.l"
-{ printf("Token: PREP 'with'\n"); return PREP; }
+#line 15 "grammar_lex.l"
+{  return PREP; }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 18 "grammar.l"
-{ printf("Token: EOL '\\n'\n"); return EOL; }
+#line 16 "grammar_lex.l"
+{  return EOL; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 19 "grammar.l"
+#line 17 "grammar_lex.l"
 { /* ignorar otros caracteres */ }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 21 "grammar.l"
+#line 19 "grammar_lex.l"
 ECHO;
 	YY_BREAK
-#line 809 "lex.yy.c"
+#line 806 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1811,6 +1808,11 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 21 "grammar.l"
+#line 19 "grammar_lex.l"
+
+
+int yywrap() {
+    return 1;
+}
 
 

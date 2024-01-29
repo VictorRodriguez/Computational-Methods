@@ -4,7 +4,7 @@
 #include <string.h>
 %}
 
-%token PREP ARTICLE NOUN VERB
+%token PREP ARTICLE NOUN VERB EOL
 %start sentence
 
 %%

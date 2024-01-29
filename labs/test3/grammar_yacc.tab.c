@@ -516,9 +516,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    12,    12,    13,    16,    19,    20,    23,    24,    27,
-      30,    33,    34,    37,    40,    41,    44,    45,    46,    49,
-      50,    51
+       0,    24,    24,    25,    28,    31,    32,    35,    36,    39,
+      42,    45,    46,    49,    52,    53,    56,    57,    58,    61,
+      62,    63
 };
 #endif
 
@@ -1091,13 +1091,13 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* sentence: AB  */
-#line 12 "grammar_yacc.y"
+#line 24 "grammar_yacc.y"
               { printf("PASS\n"); }
 #line 1097 "grammar_yacc.tab.c"
     break;
 
   case 3: /* sentence: %empty  */
-#line 13 "grammar_yacc.y"
+#line 25 "grammar_yacc.y"
            { printf("FAIL\n"); }
 #line 1103 "grammar_yacc.tab.c"
     break;
@@ -1296,7 +1296,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 54 "grammar_yacc.y"
+#line 66 "grammar_yacc.y"
 
 
 int main() {
