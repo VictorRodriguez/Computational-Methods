@@ -54,7 +54,6 @@ H : "touches"
 
 int main() {
     yyparse();
-    return 0;
 }
 
 void yyerror(const char *s) {
