@@ -5,6 +5,7 @@
 %}
 
 %token PREP ARTICLE NOUN VERB
+%start sentence
 
 %%
 
