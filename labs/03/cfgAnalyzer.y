@@ -1,0 +1,71 @@
+%{
+#include <stdio.h>
+#include <stdlib.h>
+
+extern int yylex();
+extern char* yytext;
+extern FILE* yyin;
+
+void yyerror(const char *s) {
+    fprintf(stderr, "FAIL: %s\n", s);
+}
+
+%}
+
+%token ARTICLE NOUN VERB PREPOSITION SALTO
+%start SENTENCE
+
+%%
+SENTENCE : NOUN_PHRASE VERB_PHRASE SALTO
+        | SALTO NOUN_PHRASE VERB_PHRASE
+        | SALTO NOUN_PHRASE VERB_PHRASE SALTO
+        ;
+NOUN_PHRASE : CMPLX_NOUN
+            | CMPLX_NOUN PREPOSITION_PHRASE          
+            ;
+CMPLX_VERB : VERB 
+            | PREPOSITION VERB
+            | VERB NOUN_PHRASE
+        ;
+CMPLX_NOUN : ARTICLE NOUN 
+            ;
+PREPOSITION_PHRASE : PREPOSITION CMPLX_NOUN
+            ;
+VERB_PHRASE : CMPLX_VERB
+            | CMPLX_VERB PREPOSITION_PHRASE
+            ;
+
+%%
+
+int main(int argc, char **argv) {
+
+
+    FILE *f = fopen(argv[1], "r");
+    if (!f) {
+        perror(argv[1]);
+        exit(1);
+    }
+
+    yyin = f;
+
+    int parseResult;
+
+    while ((parseResult = yyparse()) != 0) {
+        switch(parseResult) {
+            case 1:
+                printf("PASS\n");
+                break;
+
+            default:
+                printf("FAIL\n");
+                break;
+        }
+    }
+
+    fclose(f);
+    return 0;
+}
+
+int yywrap() {
+    return 1;
+}
