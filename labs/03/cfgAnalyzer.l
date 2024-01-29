@@ -11,9 +11,9 @@
 "flower"    { return NOUN; }
 "touches"   { return VERB; }
 "likes"     { return VERB; }
-"with"      { return PREPOSITION; }
 "sees"      { return VERB; }
-.           { /* ignore other characters */ }
-""         {   /* ignore spaces */}
-
+"with"      { return PREPOSITION; }
+\n          { return SALTO; }
+[ \t]       { /* ignore whitespace */ } 
+.           { return yytext[0];}
 %%

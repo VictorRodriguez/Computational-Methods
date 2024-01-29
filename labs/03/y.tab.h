@@ -57,7 +57,8 @@ extern int yydebug;
     ARTICLE = 258,                 /* ARTICLE  */
     NOUN = 259,                    /* NOUN  */
     VERB = 260,                    /* VERB  */
-    PREPOSITION = 261              /* PREPOSITION  */
+    PREPOSITION = 261,             /* PREPOSITION  */
+    SALTO = 262                    /* SALTO  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -70,6 +71,7 @@ extern int yydebug;
 #define NOUN 259
 #define VERB 260
 #define PREPOSITION 261
+#define SALTO 262
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
