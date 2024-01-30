@@ -6,9 +6,13 @@
 
 %%
 
+input: lines
+
+lines: /* empty */
+     | lines line
+
 line: NOUN_PHRASE VERB_PHRASE '\n' { printf("PASS\n"); }
-    | '\n' { /* Empty line, do nothing */ }
-    | error '\n' { printf("FAIL\n"); }
+    | error '\n' { printf("FAIL: syntax error\n"); yyerrok; }
     ;
 
 NOUN_PHRASE: CMPLX_NOUN { /* Additional actions if needed */ }
@@ -36,7 +40,8 @@ int main() {
 }
 
 int yyerror(const char *s) {
-    fprintf(stderr, "Error: %s\n", s);
+    fprintf(stderr, "FAIL: %s\n", s);
+    yyerrok;  /* Continue parsing after an error */
     return 0;
 }
 
