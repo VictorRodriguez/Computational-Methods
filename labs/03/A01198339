@@ -1,0 +1,87 @@
+/* Emily Rosenfeld AO1198339 */
+
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int yylex();
+void yyerror(const char *s);
+
+%}
+
+%union {
+    char *sval;
+}
+
+/* Aqui se definen los tokens */
+%token <sval> ARTICLE NOUN VERB PREP EOL
+%token SENTENCE NOUN_PHRASE VERB_PHRASE PREP_PHRASE CMPLX_NOUN CMPLX_VERB
+
+%%
+/* Aqui se definen las reglas */
+sentence: noun_phrase verb_phrase { printf("PASS\n"); }
+        ;
+
+noun_phrase: cmplx_noun { }
+           | cmplx_noun prep_phrase { }
+           ;
+
+verb_phrase: cmplx_verb { }
+           | cmplx_verb prep_phrase { }
+           ;
+
+prep_phrase: prep cmplx_noun { }
+           ;
+
+cmplx_noun: article noun { }
+          ;
+
+cmplx_verb: verb { }
+          | verb noun_phrase { }
+          ;
+
+article: ARTICLE { }
+       ;
+
+noun: NOUN { }
+    ;
+
+verb: VERB { }
+    ;
+
+prep: PREP { }
+    ;
+
+%%
+
+void yyerror(const char *s) {
+    fprintf(stderr, "Error: %s\n", s);
+}
+
+/* Imprimir PASS o FAIL */
+int main(int argc, char *argv[]) {
+    FILE *fd;
+
+    if (argc == 2) {
+        if (!(fd = fopen(argv[1], "r"))) {
+            perror("Error: ");
+            return -1;
+        }
+
+        yyset_in(fd);
+        int result = yyparse();
+        fclose(fd);
+
+        if (result == 0) {
+            printf("PASS\n");
+        } else {
+            printf("FAIL\n");
+        }
+    } else {
+        printf("Usage: %s filename\n", argv[0]);
+        return -1;
+    }
+
+    return 0;
+}
