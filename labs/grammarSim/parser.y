@@ -6,8 +6,10 @@
 
 %%
 
-sentence: NOUN_PHRASE VERB_PHRASE { printf("Valid sentence\n"); }
-        ;
+line: NOUN_PHRASE VERB_PHRASE '\n' { printf("PASS\n"); }
+    | '\n' { /* Empty line, do nothing */ }
+    | error '\n' { printf("FAIL\n"); }
+    ;
 
 NOUN_PHRASE: CMPLX_NOUN { /* Additional actions if needed */ }
            ;

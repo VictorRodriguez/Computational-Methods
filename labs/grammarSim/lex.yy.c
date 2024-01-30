@@ -681,7 +681,8 @@ YY_DECL
 	{
 #line 5 "lexer.l"
 
-#line 684 "lex.yy.c"
+
+#line 685 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -740,51 +741,51 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 6 "lexer.l"
+#line 7 "lexer.l"
 { return ARTICLE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 7 "lexer.l"
+#line 8 "lexer.l"
 { return ARTICLE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 8 "lexer.l"
+#line 9 "lexer.l"
 { return NOUN; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 9 "lexer.l"
+#line 10 "lexer.l"
 { return VERB; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 10 "lexer.l"
+#line 11 "lexer.l"
 { return PREP; }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 11 "lexer.l"
-{ return 0; }  /* End of input */
+#line 12 "lexer.l"
+{ return '\n'; }  /* Treat newline as end of line */
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 12 "lexer.l"
+#line 13 "lexer.l"
 ;  /* Skip whitespace */
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 14 "lexer.l"
+#line 15 "lexer.l"
 { printf("Invalid token: %s\n", yytext); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 16 "lexer.l"
+#line 17 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 787 "lex.yy.c"
+#line 788 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1789,7 +1790,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 16 "lexer.l"
+#line 17 "lexer.l"
 
 
 int yywrap() {

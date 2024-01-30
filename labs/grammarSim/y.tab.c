@@ -72,44 +72,44 @@ extern int YYPARSE_DECL();
 #define YYERRCODE 256
 typedef int YYINT;
 static const YYINT yylhs[] = {                           -1,
-    0,    1,    2,    2,    3,    4,    4,    5,
+    0,    0,    0,    1,    2,    2,    3,    4,    4,    5,
 };
 static const YYINT yylen[] = {                            2,
-    2,    1,    1,    2,    2,    1,    2,    2,
+    3,    1,    2,    1,    1,    2,    2,    1,    2,    2,
 };
 static const YYINT yydefred[] = {                         0,
-    0,    0,    0,    2,    5,    0,    1,    0,    7,    0,
-    4,    8,
+    0,    0,    2,    0,    0,    4,    3,    7,    0,    0,
+    0,    9,    1,    0,    6,   10,
 };
 #if defined(YYDESTRUCT_CALL) || defined(YYSTYPE_TOSTRING)
 static const YYINT yystos[] = {                           0,
-  257,  262,  263,  265,  258,  259,  264,  266,  265,  260,
-  267,  265,
+  256,  257,   10,  262,  263,  265,   10,  258,  259,  264,
+  266,  265,   10,  260,  267,  265,
 };
 #endif /* YYDESTRUCT_CALL || YYSTYPE_TOSTRING */
-static const YYINT yydgoto[] = {                          2,
-    3,    7,    4,    8,   11,
+static const YYINT yydgoto[] = {                          4,
+    5,   10,    6,   11,   15,
 };
-static const YYINT yysindex[] = {                      -255,
- -253,    0, -256,    0,    0, -255,    0, -254,    0, -255,
-    0,    0,
+static const YYINT yysindex[] = {                        -9,
+   -6, -255,    0,    0, -254,    0,    0,    0, -251,   -2,
+ -250,    0,    0, -251,    0,    0,
 };
 static const YYINT yyrindex[] = {                         0,
-    0,    0,    0,    0,    0,    1,    0,    7,    0,    0,
-    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,  -10,    0,
+   -1,    0,    0,    0,    0,    0,
 };
 #if YYBTYACC
 static const YYINT yycindex[] = {                         0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,
+    0,    0,    0,    0,    0,    0,
 };
 #endif
 static const YYINT yygindex[] = {                         0,
-    0,    0,   -6,    0,    0,
+    0,    0,   -7,    0,    0,
 };
-#define YYTABLESIZE 261
-static const YYINT yytable[] = {                          9,
-    6,    1,    6,   12,    5,   10,    3,    0,    0,    0,
+#define YYTABLESIZE 250
+static const YYINT yytable[] = {                          8,
+    3,   12,    8,    7,    9,    2,   16,   13,    5,   14,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -133,12 +133,10 @@ static const YYINT yytable[] = {                          9,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    6,
+    0,    0,    0,    0,    0,    0,    1,    2,    0,    8,
 };
-static const YYINT yycheck[] = {                          6,
-    0,  257,  259,   10,  258,  260,    0,   -1,   -1,   -1,
+static const YYINT yycheck[] = {                         10,
+   10,    9,  258,   10,  259,  257,   14,   10,   10,  260,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -162,9 +160,7 @@ static const YYINT yycheck[] = {                          6,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-  260,
+   -1,   -1,   -1,   -1,   -1,   -1,  256,  257,   -1,  260,
 };
 #if YYBTYACC
 static const YYINT yyctable[] = {                        -1,
@@ -192,11 +188,10 @@ static const YYINT yyctable[] = {                        -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
 };
 #endif
-#define YYFINAL 2
+#define YYFINAL 4
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
@@ -206,19 +201,21 @@ static const YYINT yyctable[] = {                        -1,
 #if YYDEBUG
 static const char *const yyname[] = {
 
-"$end",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+"$end",0,0,0,0,0,0,0,0,0,"'\\n'",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"error","ARTICLE","NOUN","VERB","PREP",
-"$accept","sentence","NOUN_PHRASE","VERB_PHRASE","CMPLX_NOUN","CMPLX_VERB",
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"error","ARTICLE","NOUN","VERB",
+"PREP","$accept","line","NOUN_PHRASE","VERB_PHRASE","CMPLX_NOUN","CMPLX_VERB",
 "PREP_PHRASE","illegal-symbol",
 };
 static const char *const yyrule[] = {
-"$accept : sentence",
-"sentence : NOUN_PHRASE VERB_PHRASE",
+"$accept : line",
+"line : NOUN_PHRASE VERB_PHRASE '\\n'",
+"line : '\\n'",
+"line : error '\\n'",
 "NOUN_PHRASE : CMPLX_NOUN",
 "VERB_PHRASE : CMPLX_VERB",
 "VERB_PHRASE : CMPLX_VERB PREP_PHRASE",
@@ -357,7 +354,7 @@ static YYINT  *yylexp = 0;
 
 static YYINT  *yylexemes = 0;
 #endif /* YYBTYACC */
-#line 30 "parser.y"
+#line 32 "parser.y"
 
 int main() {
     yyparse();
@@ -369,7 +366,7 @@ int yyerror(const char *s) {
     return 0;
 }
 
-#line 373 "y.tab.c"
+#line 370 "y.tab.c"
 
 /* For use in generated program */
 #define yydepth (int)(yystack.s_mark - yystack.s_base)
@@ -1041,45 +1038,55 @@ yyreduce:
     {
 case 1:
 #line 9 "parser.y"
-	{ printf("Valid sentence\n"); }
-#line 1046 "y.tab.c"
+	{ printf("PASS\n"); }
+#line 1043 "y.tab.c"
 break;
 case 2:
-#line 12 "parser.y"
-	{ /* Additional actions if needed */ }
-#line 1051 "y.tab.c"
+#line 10 "parser.y"
+	{ /* Empty line, do nothing */ }
+#line 1048 "y.tab.c"
 break;
 case 3:
-#line 15 "parser.y"
-	{ /* Additional actions if needed */ }
-#line 1056 "y.tab.c"
+#line 11 "parser.y"
+	{ printf("FAIL\n"); }
+#line 1053 "y.tab.c"
 break;
 case 4:
-#line 16 "parser.y"
+#line 14 "parser.y"
 	{ /* Additional actions if needed */ }
-#line 1061 "y.tab.c"
+#line 1058 "y.tab.c"
 break;
 case 5:
-#line 19 "parser.y"
+#line 17 "parser.y"
 	{ /* Additional actions if needed */ }
-#line 1066 "y.tab.c"
+#line 1063 "y.tab.c"
 break;
 case 6:
-#line 22 "parser.y"
+#line 18 "parser.y"
 	{ /* Additional actions if needed */ }
-#line 1071 "y.tab.c"
+#line 1068 "y.tab.c"
 break;
 case 7:
-#line 23 "parser.y"
+#line 21 "parser.y"
 	{ /* Additional actions if needed */ }
-#line 1076 "y.tab.c"
+#line 1073 "y.tab.c"
 break;
 case 8:
-#line 26 "parser.y"
+#line 24 "parser.y"
 	{ /* Additional actions if needed */ }
-#line 1081 "y.tab.c"
+#line 1078 "y.tab.c"
 break;
+case 9:
+#line 25 "parser.y"
+	{ /* Additional actions if needed */ }
 #line 1083 "y.tab.c"
+break;
+case 10:
+#line 28 "parser.y"
+	{ /* Additional actions if needed */ }
+#line 1088 "y.tab.c"
+break;
+#line 1090 "y.tab.c"
     default:
         break;
     }
