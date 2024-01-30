@@ -365,7 +365,7 @@ int main() {
 }
 
 int yyerror(const char *s) {
-    fprintf(stderr, "Error: %s\n", s);
+    fprintf(stderr, "FAIL: %s\n", s);
     return 0;
 }
 
@@ -1041,42 +1041,42 @@ yyreduce:
     {
 case 1:
 #line 9 "parser.y"
-	{ printf("Valid sentence\n"); }
+	{ printf("PASS\n"); }
 #line 1046 "y.tab.c"
 break;
 case 2:
 #line 12 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1051 "y.tab.c"
 break;
 case 3:
 #line 15 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1056 "y.tab.c"
 break;
 case 4:
 #line 16 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1061 "y.tab.c"
 break;
 case 5:
 #line 19 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1066 "y.tab.c"
 break;
 case 6:
 #line 22 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1071 "y.tab.c"
 break;
 case 7:
 #line 23 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1076 "y.tab.c"
 break;
 case 8:
 #line 26 "parser.y"
-	{ /* Additional actions if needed */ }
+	{  }
 #line 1081 "y.tab.c"
 break;
 #line 1083 "y.tab.c"
