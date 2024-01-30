@@ -1,0 +1,15 @@
+1.- AT TERMINAL, SEARCH FOR THE LOCATION OF THIS FILES WITH THE "cd" COMMAND.
+
+2. RUN 
+	lex analyzer.l
+
+3. RUN 
+	yacc -d analyzer.y
+
+4. RUN 
+	gcc -o analyzer y.tab.c lex.yy.c -ll
+
+5. RUN
+	./analyzer test.txt
+
+NOTE: If you want to try the program with personalized sentences, you need to change the content of the file named "test.txt".
