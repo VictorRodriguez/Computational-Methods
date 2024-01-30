@@ -13,9 +13,6 @@ int line_number = 1;
 
 %token ARTICLE NOUN VERB PREP
 
-%type <a> ARTICLE NOUN VERB PREP /* Declare the type of the attribute for each terminal */
-%type <a> sentence noun_phrase verb_phrase prep_phrase cmplx_noun cmplx_verb /* Declare the type of the attribute for each non-terminal */
-
 %%
 sentence : noun_phrase verb_phrase      { printf("PASS\n"); }
          ;
