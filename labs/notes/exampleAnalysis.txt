@@ -1,0 +1,11 @@
+a boy sees
+article + noun + verb
+
+the boy sees a flower
+article + noun + verb + article + noun
+
+a girl with a flower likes the boy
+article + noun + prep + verb + article + noun
+
+a flower sees a flower
+article + noun + verb + article + noun
