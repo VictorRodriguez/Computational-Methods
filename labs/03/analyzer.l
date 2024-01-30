@@ -23,15 +23,19 @@
 
 %%
 
-"a"|"the"	{ return ARTICLE; }
+[aA] | 
+[tT]he	{ return ARTICLE; }
 
-"boy"|"girl"	{ return NOUN; }
+[bB]oy | 
+[gG]irl	{ return NOUN; }
 
-"flower"	{ return GNOUN; }
+[fF]lower	{ return GNOUN; }
 
-"touches"|"likes"|"sees"	{ return VERB; }
+[tT]ouches |
+[lL]ikes | 
+[sS]ees	{ return VERB; }
 
-"with"		{ return PREP; }
+[wW]ith		{ return PREP; }
 
 \n          { return EOL; } 
 
