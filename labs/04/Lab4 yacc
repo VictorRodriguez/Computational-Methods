@@ -1,0 +1,234 @@
+%{
+
+#include <stdio.h>
+
+#include <stdbool.h>
+
+
+
+int yylex();
+
+void yyerror(const char *s);
+
+void printInstruction(const char* action, int value);
+
+
+
+enum Direction {
+
+    LEFT,
+
+    RIGHT,
+
+    UP,
+
+    DOWN
+
+};
+
+
+
+typedef struct {
+
+    int x;
+
+    int y;
+
+    enum Direction direction;
+
+} T_Position;
+
+
+
+T_Position T_position = {0, 0, RIGHT};
+
+
+
+bool isMoveValid(int value);
+
+void move(int value);
+
+int calculateNewDirection(int currentDirection, int degrees);
+
+void turn(int value);
+
+
+
+#define PRINT_INSTRUCTION(action, value) \
+
+    printf("%s,%d\n", action, value)
+
+
+
+%}
+
+
+
+%token T_BLOCK_NUMBER T_DEGREE_NUMBER T_ROBOT_PLEASE T_MOVE T_TURN T_BLOCKS T_DEGREES T_AHEAD T_THEN T_NEWLINE T_OTHER
+
+
+
+%%
+
+
+
+program_code : statements_code
+
+             | /* empty */
+
+             ;
+
+
+
+statements_code : statement_code
+
+               | statement_code statements_code
+
+               ;
+
+
+
+statement_code : T_ROBOT_PLEASE actions_code T_NEWLINE
+
+ ;
+
+
+
+actions_code : action_code
+
+             | action_code T_THEN actions_code
+
+    ;
+
+
+
+action_code : move_code
+
+            | turn_code
+
+            ;
+
+
+
+move_code : T_MOVE T_BLOCK_NUMBER T_BLOCKS      {move($2);}
+
+          | T_MOVE T_BLOCK_NUMBER T_BLOCKS T_AHEAD {move($2);}
+
+          ;
+
+
+
+turn_code : T_TURN T_DEGREE_NUMBER T_DEGREES {turn($2);}
+
+
+
+%%
+
+
+
+void yyerror(const char* s) {
+
+    fprintf(stderr, "Error: %s\n", s);
+
+}
+
+
+
+bool isMoveValid(int value) {
+
+    switch (T_position.direction) {
+
+        case LEFT:
+
+            return T_position.x - value >= 0;
+
+        case RIGHT:
+
+            return T_position.x + value < 10;
+
+        case UP:
+
+            return T_position.y + value < 10;
+
+        case DOWN:
+
+            return T_position.y - value >= 0;
+
+    }
+
+}
+
+
+
+void move(int value) {
+
+    if (isMoveValid(value)) {
+
+        switch (T_position.direction) {
+
+            case LEFT:
+
+                T_position.x -= value;
+
+                break;
+
+            case RIGHT:
+
+                T_position.x += value;
+
+                break;
+
+            case UP:
+
+                T_position.y += value;
+
+                break;
+
+            case DOWN:
+
+                T_position.y -= value;
+
+                break;
+
+        }
+
+        PRINT_INSTRUCTION("MOV", value);
+
+    } else {
+
+        fprintf(stderr, "Error: Invalid move\n");
+
+    }
+
+}
+
+
+
+int calculateNewDirection(int currentDirection, int degrees) {
+
+    return (currentDirection + (360 - degrees) / 90) % 4;
+
+}
+
+
+
+void turn(int value) {
+
+    int newDirection = calculateNewDirection(T_position.direction, value);
+
+    T_position.direction = newDirection;
+
+    PRINT_INSTRUCTION("TURN", value);
+
+}
+
+
+
+int main() {
+
+    yyparse();
+
+    return 0;
+
+}
+
